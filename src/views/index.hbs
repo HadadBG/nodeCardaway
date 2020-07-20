@@ -1,0 +1,198 @@
+<link rel="stylesheet" href="/css/index.css" />
+<body>
+  <div class="modal" id="login">
+    <div class="modal-content center">
+      <form id="datos">
+        <div class="input-field">
+          <i class="fas fa-envelope prefix"></i>
+          <input type="text" id="usuario" name="usuario" />
+          <label for="usuario">
+            Email
+          </label>
+        </div>
+
+        <div class="input-field">
+          <i class="fas fa-key prefix"></i>
+          <input
+            type="password"
+            id="contrasena"
+            name="contrasena"
+            data-validetta="required"
+          />
+          <label for="contrasena">
+            Contraseña
+          </label>
+        </div>
+
+        <div class="enviar">
+          <button class="btn" type="submit">
+            Entrar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <main>
+    {{#if user}}
+      <div class="myModal">
+        <div class="mycard">
+          <div class="close">
+            <span id="close">
+              x
+            </span>
+          </div>
+        </div>
+      </div>
+    {{else}}
+      <div class="mymodal">
+        <div class="mycard">
+          <div class="container" id="modal-container">
+            <img src="" alt="" class="modal-img" id="modal-test" />
+          </div>
+        </div>
+        <div class="close">
+          <span id="close">
+            X
+          </span>
+        </div>
+      </div>
+    {{/if}}
+
+    <div class="row carouselContainer">
+      <div class="col s12 center-align">
+        <h4 id="destacado">
+          Destacado
+        </h4>
+      </div>
+      <div class="col s12">
+        <div class="carousel">
+          <a class="carousel-item">
+            <img src="/postales/Paisajes/edificios_01.jpg" />
+          </a>
+          <a class="carousel-item">
+            <img src="/postales/Paisajes/faro_01.jpg" />
+          </a>
+          <a class="carousel-item">
+            <img src="/postales/Paisajes/lago_01.jpg" />
+          </a>
+          <a class="carousel-item">
+            <img src="/postales/Paisajes/playa_01.jpg" />
+          </a>
+          <a class="carousel-item">
+            <img src="/postales/Paisajes/puente_01.jpg" />
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="main">
+      <div class="row">
+        <div class="col s12">
+          <h1 class="center-align" id="slogan">
+            Conecta con las personas que amas
+          </h1>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="container" id="icon-container">
+          <div class="icon-div">
+            <a href="cat.php?id=Amor" id="icons">
+              <i class="material-icons">
+                favorite_border
+              </i>
+            </a>
+          </div>
+          <div class="icon-div">
+            <a href="cat.php?id=Fechas_fest" id="icons">
+              <i class="material-icons">
+                date_range
+              </i>
+            </a>
+          </div>
+          <div class="icon-div">
+            <a href="cat.php?id=Vintage" id="icons">
+              <i class="material-icons">
+                history
+              </i>
+            </a>
+          </div>
+          <div class="icon-div">
+            <a href="cat.php?id=Comida" id="icons">
+              <i class="material-icons">
+                local_dining
+              </i>
+            </a>
+          </div>
+          <div class="icon-div">
+            <a href="cat.php?id=Paisajes" id="icons">
+              <i class="material-icons">
+                beach_access
+              </i>
+            </a>
+          </div>
+          <div class="icon-div">
+            <a href="cat.php?id=Otros" id="icons">
+              <i class="material-icons">
+                search
+              </i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="container" id="gal-container">
+          <div class="row">
+            <div class="col s3">
+              <h4>
+                Galería
+              </h4>
+            </div>
+          </div>
+          <div class="postalContainer">
+            <div class="postal post1">
+              <img src="/postales/Amor/gato_01.png" alt="1" />
+            </div>
+            <div class="postal post2">
+              <img src="/postales/Amor/gato_01.png" alt="2" />
+            </div>
+            <div class="postal post3">
+              <img src="/postales/Amor/gato_01.png" alt="3" />
+            </div>
+
+            <div class="postal post4">
+              <img src="/postales/Amor/gato_01.png" alt="4" />
+            </div>
+            <div class="postal post5">
+              <img src="/postales/Amor/gato_01.png" alt="5" />
+            </div>
+            <div class="postal post6">
+              <img src="/postales/Amor/gato_01.png" alt="6" />
+            </div>
+            <div class="postal post7">
+              <img src="/postales/Amor/gato_01.png" alt="7" />
+            </div>
+            <div class="postal post8">
+              <img src="/postales/Amor/gato_01.png" alt="8" />
+            </div>
+            <div class="postal post9">
+              <img src="/postales/Amor/gato_01.png" alt="9" />
+            </div>
+          </div>
+          <div class="row wrapper" id="wrapper">
+	    <div class="charging chargingPost1"></div>
+	    <div class="charging chargingPost2"></div>
+	    <div class="charging chargingPost3"></div>
+	    <div class="charging chargingPost4"></div>
+	    <div class="charging chargingPost5"></div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="/js/index.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.3/axios.min.js"
+  ></script>

@@ -1,0 +1,43 @@
+.myForm{
+  width: 65%;
+}
+.myForm2{
+  width: 95%;
+}
+[type="radio"]:checked + span:after,
+ 
+[type="radio"].with-gap:checked + span:before,
+ 
+[type="radio"].with-gap:checked + span:after {
+ 
+  border: 2px solid #226fbb;
+ 
+} 
+[type="radio"]:checked + span:after,
+ 
+[type="radio"].with-gap:checked + span:after {
+ 
+  background-color: #226fbb;
+ 
+}
+
+.datepicker-date-display {
+  
+  background-color:#23374b!important;
+ 
+}
+.datepicker-cancel,
+.datepicker-clear,
+.datepicker-today,
+.datepicker-done {
+  color: #1089ff;
+
+}
+.datepicker-day-button:focus {
+  background-color:#226fbb;
+}
+.datepicker-table td.is-selected {
+  background-color: #226fbb;
+
+}
+
