@@ -1,7 +1,8 @@
-var wrapper=document.getElementById("wrapper")
-var loginForm=document.getElementById("datos")
-var content=document.getElementById("postalContainer")
-
+var wrapper = document.getElementById("wrapper");
+var loginForm = document.getElementById("datos");
+var content = document.getElementById("postalContainer");
+var no_page = 0;
+var postalCharger=document.getElementById("postalCharger")
 //
 //Materialize Inicialization
 //
@@ -40,28 +41,50 @@ document.getElementById("close").addEventListener("click", () => {
   modal.style.display = "none";
 });
 
-window.addEventListener("scroll", ()=>{
-  let {scrollTop,scrollHeight,clientHeight} = document.documentElement;
+function cargaPostales() {
+  axios
+    .get("/getPostales", {
+      no_postales: 9,
+      no_page: no_page
+    })
+    .then(function(res) {
+      if (res.status == 200) {
 
-  console.log(scrollTop);
-  if(clientHeight+scrollTop >= scrollHeight-5){
+	let postalBlock = document.createElement("div")
+
+	postalBlock.setAttribute("class","postalContainer")
+        res.data.forEach((postal, idx) => {
+	  postalBlock.innerHTML += 
+	    '<div class="postal post'+(idx+1)+
+	    '"><img src="/postales/Amor/gato_01.png"'+
+	    ' alt="'+idx+'"> </div>'
+        });
+	console.log(postalBlock.innerHTML)
+	postalCharger.appendChild(postalBlock)
+      }
+    })
+    .catch(function(err) {
+      console.log(err)
+      setTimeout(cargaPostales, 2000);
+    })
+    .then(function() {
+      //Codigo a ejecutarse sin importar nada
+    });
+}
+cargaPostales();
+window.addEventListener("scroll", () => {
+  let { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+  if (clientHeight + scrollTop == scrollHeight) {
+    cargaPostales();
   }
-})
+});
 /*)*/
 //e.preventDefault();
 //$.ajax({
 
 //method:"POST",
 //url:"./php/functions/login.php",
-//data: $("#datos").serialize(),
-//cache:false,
-//success:function(respAX){
-
-//var AX = JSON.parse(respAX);
-
-//if(AX.resp != 0 && AX.resp != -1){
-
-//Swal.fire(
+//data: $("#datos").serialize(), cache:false, success:function(respAX){ var AX = JSON.parse(respAX); if(AX.resp != 0 && AX.resp != -1){ Swal.fire(
 //'Bienvenid@!',
 //AX.resp,
 //'success'
@@ -98,9 +121,9 @@ window.addEventListener("scroll", ()=>{
 //})
 
 //}
-const postalesIni=10
-let actualPage=0
-let postPerPage=6
+const postalesIni = 10;
+let actualPage = 0;
+let postPerPage = 6;
 
 //});
 //var post_ini=6;
@@ -145,3 +168,32 @@ let postPerPage=6
 
 //});
 /*}*/
+
+var modal=document.getElementsByClassName("myModal")[0];
+var span=document.getElementById("close");
+
+var img = document.getElementsByClassName('postal');
+var modalImg = document.getElementById("modal-test");
+
+
+document.addEventListener('click', function (event) {
+	if (event.target.matches('.postal img')) {
+    modal.style.display = "block";
+    modalImg.src = event.target.src;
+    if(modalImg.height > modalImg.width){
+      modalImg.style.width="50%";
+    }
+    else {
+      modalImg.style.width="100%";
+      modalImg.style.height="auto";
+    }
+    
+	}
+
+
+}, false);
+
+span.addEventListener("click",()=>{
+  modal.style.display="none";
+  
+});

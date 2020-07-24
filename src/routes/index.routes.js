@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 
 // Controllers
-const { renderIndex,getPostales } = require("../controllers/index.controller");
+import controller from  "../controllers/index.controller"
 
-router.get("/", renderIndex);
-router.get("/getPostales",getPostales)
+router.get("/", controller.renderIndex);
+router.get("/getPostales",controller.getPostales)
+router.get("/registro",controller.renderFormulario)
 
-module.exports = router;
+module.exports =  router;

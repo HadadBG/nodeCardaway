@@ -1,38 +1,5 @@
-html {
-  background-color: #f2f2f2;
-}
-
-* {
-  padding: 0px;
-  margin: 0px;
-  font-family: "Montserrat", sans-serif;
-}
-/*############################################################NAV###############################################################*/
-.nav-wrapper {
-  background-color: #23374b;
-}
-
-#nav-li:hover {
-  text-decoration: underline;
-}
-
-.nav-wrapper > li:hover {
-  text-decoration: underline;
-}
-
-.brand-logo {
-  font-family: "Nunito", sans-serif;
-  margin: 10px;
-}
-
-.btn {
-  background-color: #226fbb;
-  border-radius: 20px;
-  text-transform: none;
-}
-
-.btn:hover {
-  background-color: #1089ff;
+html{
+ background-color:#f2f2f2; 
 }
 
 /*###########################################################SLIDER#############################################################*/
@@ -237,7 +204,17 @@ html {
   grid-auto-rows: 100px;
   grid-gap:2%;
 }
+
 .postal {
+  width: 100%;
+  height: auto;
+  padding: 1%;
+  margin-bottom: 5%;
+  cursor: pointer;
+}
+
+.postal:hover {
+  opacity: 0.7;
 }
 .post1 {
   grid-column: 1;

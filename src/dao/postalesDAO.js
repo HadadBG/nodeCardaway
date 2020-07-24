@@ -1,5 +1,7 @@
 let postales;
 let cardaway;
+import { ObjectId } from "bson"
+import {Date}       from "bson"
 
 export default class PostalesDAO {
   static async injectDB(conn) {
@@ -15,7 +17,7 @@ export default class PostalesDAO {
       );
     }
   }
-  static async insertPostales(toInsertPostales = [{ _id: null }]) {
+  static async insertPostales(toInsertPostales = [{  }]) {
     let response = { insertedIds: undefined, errors: undefined };
     try {
       let insertResult = await postales.insertMany(toInsertPostales, {
@@ -32,8 +34,7 @@ export default class PostalesDAO {
   static async deletePostales(toDeletePostalesIds = []) {
     let deleteOperations = toDeletePostalesIds.map(function(id) {
       let Operation = {};
-
-      Operation["deleteOne"] = {filter:{_id:id }};
+      Operation["deleteOne"] = {filter:{_id:ObjectId(id) }};
       return Operation;
     });
     let response={nDeleted:undefined,errors:undefined};
@@ -45,4 +46,18 @@ export default class PostalesDAO {
     }
     return response;
   }
+
+  static async getPostales({
+    page=0,
+    postalesPerPage=9
+  }){
+    let response
+  try{
+   response= await postales.find({},{limit:postalesPerPage,skip:page*postalesPerPage}).toArray() 
+  }catch(e){
+    response=e
+  }
+    return response
+  }
+
 }

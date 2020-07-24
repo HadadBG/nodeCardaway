@@ -1,14 +1,20 @@
-const indexCtrl = {};
-
-indexCtrl.renderIndex = (req, res) => {
+import PostalesDAO from "../dao/postalesDAO.js"
+export default class  indexController{
+static renderIndex (req, res) {
   //res.render('index');
   res.render('index');
 };
 
-indexCtrl.getPostales = (req,res) =>{
-  
-  res.json({hola:"Saludos Camarada"});
+static async getPostales  (req,res){
+  let postales= await PostalesDAO.getPostales({page:0,postalesPerPage:9});
+   
+  res.json(postales);
+}
+
+static renderFormulario(req,res){
+res.render('formulario')  
 }
 
 
-module.exports = indexCtrl;
+
+}

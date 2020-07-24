@@ -1,7 +1,8 @@
+<link rel="stylesheet" href="/css/header.css" />
 <header>
   <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo">
+      <a href="/" class="brand-logo">
         CARDAWAY
       </a>
       <a href="#" data-target="mobile-demo" class="sidenav-trigger">
@@ -28,14 +29,15 @@
               Cerrar Sesión
             </a>
           </li>
-        {{else}}
+        {{else if registro}}
+	{{else}}
           <li id="nav-li">
             <a class="waves-effect waves-light btn modal-trigger" href="#login">
               Iniciar Sesion
             </a>
           </li>
           <li id="nav-li">
-            <a class="waves-effect waves-light btn modal-trigger">
+            <a class="waves-effect waves-light btn modal-trigger" href="/Registro">
               Crea tu Cuenta
             </a>
           </li>
@@ -58,3 +60,4 @@
     </li>
   </ul>
 </header>
+

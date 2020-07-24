@@ -1,5 +1,8 @@
 .myForm{
-  width: 65%;
+  display:flex;
+  justify-content:center; 
+  align-items:center;
+  margin-top:7rem;
 }
 .myForm2{
   width: 95%;
@@ -39,5 +42,38 @@
 .datepicker-table td.is-selected {
   background-color: #226fbb;
 
+}
+
+.btn {
+  background-color: #226fbb;
+  border-radius: 20px;
+  text-transform: none;
+}
+
+.btn:hover {
+  background-color: #1089ff;
+}
+
+.input-field input:focus + label {
+  color: #226fbb !important;
+}
+/* label underline focus color */
+.input-field input:focus {
+  border-bottom: 1px solid #226fbb !important;
+}
+.input-field .prefix.active{
+  color: #226fbb !important;
+}
+
+.error{
+  color: #f44336 !important;
+
+}
+.error input{
+
+  border-bottom: 1px solid #f44336 !important;
+}
+.error label{
+  color:#f44336 !important;
 }
 
