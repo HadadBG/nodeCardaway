@@ -74,7 +74,7 @@ formulario.addEventListener("submit", event => {
 	  success=true
 	}
 	else{
-		myswal.fire("Cardaway", "Ocurrio un error de Comunicacion con el Servidor", "error");	
+		myswal.fire("Cardaway", "Ocurrio un Error", "error");	
 		success=false
 		response.data.errors.forEach(error =>{
 		  //document.get.getElementById(error.id).
@@ -89,7 +89,7 @@ formulario.addEventListener("submit", event => {
       }
     })
     .catch(error => {
-      myswal.fire("Cardaway", "Ocurrio un error", "error");
+      myswal.fire("Cardaway", "Ocurrio un error de Comunicacion con el Servidor", "error");
       success=false
     });
 });

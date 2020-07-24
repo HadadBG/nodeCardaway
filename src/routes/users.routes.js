@@ -4,6 +4,6 @@ const router = express.Router();
 // Controllers
 import controller from  "../controllers/users.controller.js"
 
-router.post("/agregarUsuario", controller.agregarUsuario);
+router.post("/Registro", controller.agregarUsuario);
 
 module.exports = router;

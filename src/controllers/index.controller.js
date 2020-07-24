@@ -12,8 +12,10 @@ static async getPostales  (req,res){
 }
 
 static renderFormulario(req,res){
-res.render('formulario')  
+
+  res.render('formulario', {registro:true})  
 }
+
 
 
 

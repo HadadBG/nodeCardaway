@@ -1,4 +1,5 @@
 import PostalesDAO from  "./dao/postalesDAO.js"
+import usuariosDao from "./dao/usersDAO.js"
 import {MongoClient} from "mongodb"
 require("dotenv").config();
 export default class Database{
@@ -14,6 +15,7 @@ MongoClient.connect(
     process.exit(1)
   })
   .then(async client => {
+    await usuariosDao.injectDB(client)
     await PostalesDAO.injectDB(client)
     console.log("Conected Database")
   })
