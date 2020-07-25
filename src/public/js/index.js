@@ -44,8 +44,7 @@ document.getElementById("close").addEventListener("click", () => {
 function cargaPostales() {
   axios
     .get("/getPostales", {
-      no_postales: 9,
-      no_page: no_page
+      filter:{}
     })
     .then(function(res) {
       if (res.status == 200) {

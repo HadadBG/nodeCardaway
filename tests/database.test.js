@@ -27,7 +27,7 @@ describe("DatabaseTest", () => {
   })
   test("Can Insert a User",async()=>{
     const testUsuario = {
-      _id:"hadad.bautista@gmail.com",
+      _id:"test@test.test",
       nombre:"Hadad",
       primerAp:"Bautista",
       segundoAP:"García",
@@ -42,5 +42,6 @@ describe("DatabaseTest", () => {
   test("Can Delete a User",async ()=>{
     const deleteResult = await UsuariosDAO.deleteUsuario(usuarioId)
     expect(deleteResult.errors).toBeUndefined()  
+    expect(deleteResult.n).toEqual(1)
   })
 })

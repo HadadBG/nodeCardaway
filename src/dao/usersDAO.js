@@ -21,25 +21,16 @@ export default class UsuariosDAO {
     if(toInsertUsuario.passwd)
       toInsertUsuario.passwd= await bcrypt.hash(toInsertUsuario.passwd, 10)
    let response = {insertedId:undefined, errors:undefined}
-    try{
       let insertResult = await usuarios.insertOne(toInsertUsuario)
       response.insertedId=insertResult.insertedId
-    } 
-    catch(e){
-      response.errors=e
-    }
     return response
     
   }
   static async deleteUsuario(toDeleteId){
-    let response = {errors:undefined}
-    try{
-    await usuarios.deleteOne({_id:toDeleteId})
+    let response = {n:undefined}
+    let deleteResult=await usuarios.deleteOne({_id:toDeleteId})
+      response.n=deleteResult.deletedCount
 
-    }
-    catch(e){
-      response.errors=e
-    }
     return response
   }
 

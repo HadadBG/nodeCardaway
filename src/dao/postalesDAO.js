@@ -49,11 +49,12 @@ export default class PostalesDAO {
 
   static async getPostales({
     page=0,
-    postalesPerPage=9
+    postalesPerPage=9,
+    filter={}
   }){
     let response
   try{
-   response= await postales.find({},{limit:postalesPerPage,skip:page*postalesPerPage}).toArray() 
+   response= await postales.find(filter,{limit:postalesPerPage,skip:page*postalesPerPage}).toArray() 
   }catch(e){
     response=e
   }

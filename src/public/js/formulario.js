@@ -1,5 +1,6 @@
 var formulario = document.getElementById("formulario");
 var success
+var lastResponseErrors=[]
 document.addEventListener("DOMContentLoaded", function() {
   espanol = {
     cancel: "Cancelar",
@@ -66,30 +67,31 @@ const myswal = Swal.mixin({
 
 formulario.addEventListener("submit", event => {
   event.preventDefault();
+  resetForm()  
   axios.post("/Registro", serializeForm())
     .then(response => {
       if (response.status == 200) {
-	if(response.data.errors == undefined){
+	if(response.data.errors.length == 0){
 	  myswal.fire("Cardaway", "Bienvenido a nuestra Comunidad", "success");
 	  success=true
 	}
 	else{
-		myswal.fire("Cardaway", "Ocurrio un Error", "error");	
+		myswal.fire("Cardaway", "Error en el Formulario", "error");	
 		success=false
+		lastResponseErrors=response.data.errors
 		response.data.errors.forEach(error =>{
-		  //document.get.getElementById(error.id).
-		})
-		  
-		
 
+		  document.getElementById("div_"+error.id).classList.add("error")
+		  document.getElementById("span_"+error.id).textContent=error.msg
+		})
 	}
       } else {
-        myswal.fire("Cardaway", "Ocurrio un error de Comunicacion con el Servidor", "error");	
+        myswal.fire("Cardaway", "Ocurrio un Error", "error");	
 	success=false
       }
     })
     .catch(error => {
-      myswal.fire("Cardaway", "Ocurrio un error de Comunicacion con el Servidor", "error");
+      myswal.fire("Cardaway", "Ocurrio un error de Comunicacion", "error");
       success=false
     });
 });
@@ -99,13 +101,23 @@ function serializeForm() {
   jsonRes["primerAp"] = document.getElementById("primerAp").value;
   jsonRes["segundoAp"] = document.getElementById("segundoAp").value;
   jsonRes["password"] = document.getElementById("password").value;
-  jsonRes["_id"] = document.getElementById("correo").value;
+  jsonRes["correo"] = document.getElementById("correo").value;
+  try{
   jsonRes["fechaNac"] = parser(document.getElementById("fechaNac").value);
+  }catch{
+  jsonRes["fechaNac"]=""
+  }
   let radios = document.getElementsByName("group1");
   radios.forEach(radio => {
     if (radio.checked) jsonRes["genero"] = radio.value;
   });
   return jsonRes;
 }
-
+function resetForm(){
+  lastResponseErrors.forEach(error =>{
+    	  document.getElementById("div_"+error.id).classList.remove("error")
+		  document.getElementById("span_"+error.id).textContent=""
+	
+  })
+}
 
