@@ -63,11 +63,15 @@ html{
   border-radius: 30%;
   width: 16%;
   height: auto;
-  background-color: #e2e2e2;
   display: flex;
+  background-color: #e2e2e2;
   align-items: center;
   justify-content: center;
   font-size: 30px;
+}
+.icon-div:hover{
+
+  cursor:pointer;
 }
 
 /*############################################################GAL###############################################################*/

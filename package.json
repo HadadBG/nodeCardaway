@@ -6,7 +6,6 @@
   "scripts": {
     "start": "node --exec babel-node index.js",
     "dev": "nodemon --exec babel-node src/index.js",
-
     "test": "jest"
   },
   "author": "Hadad Bautista García",

@@ -6,9 +6,11 @@ static renderIndex (req, res) {
 };
 
 static async getPostales  (req,res){
-  let postales= await PostalesDAO.getPostales({page:0,postalesPerPage:9});
+  console.log(req)
+  let postales= await PostalesDAO.getPostales(req.body);
    
   res.json(postales);
+  
 }
 
 static renderFormulario(req,res){
