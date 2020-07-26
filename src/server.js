@@ -2,13 +2,16 @@ import express from 'express'
 import handlebars from'express-handlebars'
 import path from 'path'
 import passport from 'passport'
-import database from './database.js'  
+import {database,client} from './database.js'  
+import session from  "express-session"
+import mongo from  "connect-mongo"
 
 //Inicialization
 const app = express();
-
+const MongoStore = mongo(session)
 // settings
-database.configDb();
+let promise = database.configDb();
+
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.hbs', handlebars({
   defaultLayout: 'main',
@@ -19,12 +22,23 @@ app.engine('.hbs', handlebars({
 //Midlewares
 app.use(express.json())
 
+promise.then(()=>{
+app.use(session({
+    resave:"false",
+    saveUninitialized: true,
+    secret:"estoessecretoshhh",
+    store: new MongoStore({ client: database.client })
+}));
+})
+
+
+app.use(passport.initialize());
+app.use(passport.session());
 // routes
 app.set('view engine', '.hbs');
 app.use(require ('./routes/index.routes'));
 app.use(require('./routes/users.routes.js'))
 
-//Global Variable
 
 // static files
 app.use(express.static(path.join(__dirname, 'public')));

@@ -1,7 +1,7 @@
 var wrapper = document.getElementById("wrapper");
 var loginForm = document.getElementById("datos");
 var content = document.getElementById("postalContainer");
-var no_page = 0;
+var page = 0;
 var postalCharger = document.getElementById("postalCharger");
 var filter = {};
 var categorias = ["Amor","Fechas Festivas","Vintage",
@@ -46,9 +46,10 @@ document.getElementById("close").addEventListener("click", () => {
 cargaPostales();
 function cargaPostales(){
 
-axios.get("/getPostales", {
-    "filter": "dhdsfj",
-    "page": "hfj"
+axios.get("/getPostales", {params:{
+    "page":page ,
+    "filter": filter
+}
   })
   .then(function(res) {
     if (res.status == 200) {
@@ -63,9 +64,9 @@ axios.get("/getPostales", {
           ' alt="' +
           idx +
           '"> </div>';
-        no_page += 1;
         console.log(postal);
       });
+      page+=1
       postalCharger.appendChild(postalBlock);
     }
   })

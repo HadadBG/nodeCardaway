@@ -33,8 +33,7 @@ static async agregarUsuario (req, res) {
   let response=await usuariosDao.insertUsuario(result.json)
     }catch(e){
       result.errors.push({id:"correo",msg:"Correo electronico ya registrado"})
-    }
-    
+    } 
   }
   res.json({errors:result.errors});
   
