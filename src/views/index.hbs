@@ -35,12 +35,20 @@
 
 {{#if user}}
   <div class="myModal">
-    <div class="mycard">
-      <div class="close">
-        <span id="close">
-          x
-        </span>
+    <div class="myCard">
+      <div class="card-content">
+        <a class="waves-effect waves-light btn center" id="enviar">
+          Enviar
+        </a>
       </div>
+      <div class="container" id="modal-container">
+        <img src="" alt="" class="modal-img" id="modal-test" />
+      </div>
+    </div>
+    <div class="close">
+      <span id="close">
+        X
+      </span>
     </div>
   </div>
 {{else}}
@@ -95,7 +103,7 @@
 
   <div class="row">
     <div class="container" id="icon-container">
-	<div class="icon-div" id="catAll">
+      <div class="icon-div" id="catAll">
         <a id="icons">
           <i class="material-icons">
             all_inclusive
@@ -111,14 +119,14 @@
         </a>
       </div>
       <div class="icon-div" id="catFechas">
-        <a  id="icons">
+        <a id="icons">
           <i class="material-icons">
             date_range
           </i>
         </a>
       </div>
       <div class="icon-div" id="catVintage">
-        <a  id="icons">
+        <a id="icons">
           <i class="material-icons">
             history
           </i>
@@ -132,7 +140,7 @@
         </a>
       </div>
       <div class="icon-div" id="catPaisajes">
-        <a  id="icons">
+        <a id="icons">
           <i class="material-icons">
             beach_access
           </i>
@@ -169,10 +177,10 @@
     </div>
   </div>
 </div>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-  <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.all.min.js"
-    ></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.all.min.js"
+></script>
 <script
   src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.3/axios.min.js"
 ></script>

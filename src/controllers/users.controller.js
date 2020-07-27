@@ -1,4 +1,5 @@
 import usuariosDao from "../dao/usersDAO.js"
+import passport from "passport"
 function validarCampos(json){
   let ret={}
   ret["errors"]=[]
@@ -27,6 +28,7 @@ function validarCampos(json){
 
 export default class  userController{
 static async agregarUsuario (req, res) {
+  console.log(req)
   let result=validarCampos(req.body)
   if(result.errors.length == 0){
     try{
@@ -39,11 +41,21 @@ static async agregarUsuario (req, res) {
   
 };
 
-static signin = passport.authenticate("local", {
-    successRedirect: "/notes",
-    failureRedirect: "/users/signin",
-    failureFlash: true
-  });
+static logIn(req,res) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) {  return res.json(err) }
+    if (!user) {  return res.json(info); }
+    req.logIn(user, function(err) {
+      if(err){
+	return res.json(err)
+      }
+	return res.json(info) 
+    });
+  })(req, res);  
+}
+static renderEnvio(req,res){
+  res.render('usuario/envio')
+}
 
 }
 

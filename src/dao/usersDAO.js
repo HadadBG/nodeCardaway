@@ -35,13 +35,18 @@ export default class UsuariosDAO {
   }
 static async login({username,password}){
   let usuario = await usuarios.findOne({_id:username})
-  if(usuario.passwd == undefined){
-    return {loginReuslt:-1,usuario:usuario}
+  if(usuario == null){
+    return {loginResult:-1,usuario:usuario}
   }
   if(await bcrypt.compare(password,usuario.passwd)){
-    return {loginReuslt:1,usuario:usuario}
+    return {loginResult:1,usuario:usuario}
   }
   else{
-    return {loginReuslt:0,usuario:usuario}
+    return {loginResult:0,usuario:usuario}
   }
- } } 
+ }
+static async getUsuario({email}){
+  let usuario = usuarios.findOne({_id:email})
+  return usuario
+}
+} 

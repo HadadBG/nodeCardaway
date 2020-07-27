@@ -40,8 +40,13 @@ describe("DatabaseTest", () => {
     expect(insertResult.errors).toBeUndefined() 
   })
   test("A user can login",async()=>{
-    let {loginReuslt,usuario}=await UsuariosDAO.login({username:"test@test.test",password:"hola123"})
-    expect(loginReuslt).toEqual(1)
+    let {loginResult,usuario}=await UsuariosDAO.login({username:"test@test.test",password:"hola123"})
+    expect(loginResult).toEqual(1)
+    expect(usuario.nombre).toEqual("Hadad")
+  })
+  test("Can get a user by Email",async ()=>{
+    let usuario = await UsuariosDAO.getUsuario({email:"test@test.test"})
+    expect(usuario.nombre).toEqual("Hadad")
   })
   test("Can Delete a User",async ()=>{
     const deleteResult = await UsuariosDAO.deleteUsuario(usuarioId)

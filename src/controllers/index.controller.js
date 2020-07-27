@@ -10,8 +10,7 @@ static async getPostales  (req,res){
   reqJson["page"]=parseInt(req.query.page)
   reqJson["filter"]=JSON.parse(req.query.filter)
   let postales= await PostalesDAO.getPostales(reqJson)
-  res.json(postales)
-  
+  res.json(postales) 
 }
 
 static renderFormulario(req,res){
