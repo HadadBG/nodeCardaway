@@ -29,6 +29,8 @@ app.use(session({
     secret:"estoessecretoshhh",
     store: new MongoStore({ client: database.client })
 }));
+}).catch(e=>{
+  console.log(e)
 })
 
 

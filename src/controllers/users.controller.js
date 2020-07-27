@@ -39,7 +39,11 @@ static async agregarUsuario (req, res) {
   
 };
 
-
+static signin = passport.authenticate("local", {
+    successRedirect: "/notes",
+    failureRedirect: "/users/signin",
+    failureFlash: true
+  });
 
 }
 

@@ -1,32 +1,24 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+import PostalesDAO from "./../dao/postalesDAO.js"
 
-const User = require('../models/User'); 
-
-passport.use(new LocalStrategy({
-  usernameField: 'email'
-}, async (email, password, done) => {
+passport.use(new LocalStrategy(
+  async (username, password, done) => {
+    let loginReuslt= PostalesDAO.login({
+      username:username,
+      password:password
+    } )
   // Match Email's User
-  const user = await User.findOne({email: email});
-  if (!user) {
-    return done(null, false, { message: 'Not User found.' });
-  } else {
+  if (loginReuslt==-1) {
+    return done(null, false, { message: 'Usuario no regitrado' });
+  } else if(loginReuslt == 1){
     // Match Password's User
-    const match = await user.matchPassword(password);
-    if(match) {
-      return done(null, user);
-    } else {
-      return done(null, false, { message: 'Incorrect Password.' });
+      return done(null, username);
+  }
+    else {
+      return done(null, false, { message: 'Contraseña Incorrecta' });
     }
   }
-}));
+));
 
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
 
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    done(err, user);
-  });
-});

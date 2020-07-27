@@ -68,7 +68,7 @@ const myswal = Swal.mixin({
 formulario.addEventListener("submit", event => {
   event.preventDefault();
   resetForm()  
-  axios.post("/Registro", serializeForm())
+  axios.post("/registro", serializeForm())
     .then(response => {
       if (response.status == 200) {
 	if(response.data.errors.length == 0){

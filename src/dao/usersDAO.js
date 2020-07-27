@@ -33,8 +33,15 @@ export default class UsuariosDAO {
 
     return response
   }
-
-
-}
-
-
+static async login({username,password}){
+  let usuario = await usuarios.findOne({_id:username})
+  if(usuario.passwd == undefined){
+    return {loginReuslt:-1,usuario:usuario}
+  }
+  if(await bcrypt.compare(password,usuario.passwd)){
+    return {loginReuslt:1,usuario:usuario}
+  }
+  else{
+    return {loginReuslt:0,usuario:usuario}
+  }
+ } } 

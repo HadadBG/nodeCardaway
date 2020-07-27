@@ -13,15 +13,15 @@ return MongoClient.connect(
 )
   .catch(err => {
     console.error(err.stack)
-    process.exit(1)
+   process.exit(1)
   })
   .then(async client => {
     //console.log(client)
     this.client=client  
     await usuariosDao.injectDB(client)
-    await PostalesDAO.injectDB(client)
+   await PostalesDAO.injectDB(client)
     console.log("Database Connected") 
-  })
+ })
 }
 }
 export  {database,client}
