@@ -4,13 +4,19 @@ var content = document.getElementById("postalContainer");
 var page = 0;
 var postalCharger = document.getElementById("postalCharger");
 var filter = {};
-var categorias = ["Amor","Fechas Festivas","Vintage",
-"Comida","Paisajes","Otros"];
-var success
+var categorias = [
+  "All",
+  "Amor",
+  "Fechas Festivas",
+  "Vintage",
+  "Comida",
+  "Paisajes",
+  "Otros"
+];
+var success;
 const myswal = Swal.mixin({
   onClose: () => {
-    if(success)
-      location.href = "/";
+    if (success) location.href = "/";
   }
 });
 
@@ -27,35 +33,34 @@ document.addEventListener("DOMContentLoaded", function() {
   var instances = M.Modal.init(elems, {});
 });
 
-document.getElementById("datos").addEventListener("submit", (event) => {
-  event.preventDefault()
-  let username=document.getElementById("usuario").value
-  let password=document.getElementById("contrasena").value
-  axios.post("/logIn",{username:username,password:password})
-    .then(res=>{
-      if(res.status == 200){
-	if(res.data.success){
-	  myswal.fire("Bienvenid@!",res.data.msg,"success")
-	  success=true
-	}
-	else{
-	  myswal.fire("Cardaway",res.data.msg,"error")
-	  success=false
-	}
-	
+document.getElementById("datos").addEventListener("submit", event => {
+  event.preventDefault();
+  let username = document.getElementById("usuario").value;
+  let password = document.getElementById("contrasena").value;
+  axios
+    .post("/logIn", { username: username, password: password })
+    .then(res => {
+      if (res.status == 200) {
+        if (res.data.success) {
+          myswal.fire("Bienvenid@!", res.data.msg, "success");
+          success = true;
+        } else {
+          myswal.fire("Cardaway", res.data.msg, "error");
+          success = false;
+        }
       }
     })
-  .catch(erro=>{
-    myswal.fire("Cardaway","Ocurrio un error de comunicacion","error")
-    success=false
-  })
+    .catch(erro => {
+      myswal.fire("Cardaway", "Ocurrio un error de comunicacion", "error");
+      success = false;
+    });
 });
 
 document.addEventListener(
   "click",
   function(event) {
     if (event.target.matches(".gal-img")) {
-      console.log("hola")
+      console.log("hola");
       modal.style.display = "block";
       modalImg.src = event.target.src;
       if (modalImg.height > modalImg.width) {
@@ -73,39 +78,40 @@ document.getElementById("close").addEventListener("click", () => {
   modal.style.display = "none";
 });
 cargaPostales();
-function cargaPostales(){
+function cargaPostales() {
+  axios
+    .get("/getPostales", {
+      params: {
+        page: page,
+        filter: filter
+      }
+    })
+    .then(function(res) {
+      if (res.status == 200) {
+        let postalBlock = document.createElement("div");
 
-axios.get("/getPostales", {params:{
-    "page":page ,
-    "filter": filter
-}
-  })
-  .then(function(res) {
-    if (res.status == 200) {
-      let postalBlock = document.createElement("div");
-
-      postalBlock.setAttribute("class", "postalContainer");
-      res.data.forEach((postal, idx) => {
-        postalBlock.innerHTML +=
-          '<div class="postal post' +
-          (idx + 1) +
-          '"><img src="/postales/Amor/gato_01.png"' +
-          ' alt="' +
-          idx +
-          '"> </div>';
-        console.log(postal);
-      });
-      page+=1
-      postalCharger.appendChild(postalBlock);
-    }
-  })
-  .catch(function(err) {
-    console.log(err);
-    setTimeout(cargaPostales, 2000);
-  })
-  .then(function() {
-    //Codigo a ejecutarse sin importar nada
-  });
+        postalBlock.setAttribute("class", "postalContainer");
+        res.data.forEach((postal, idx) => {
+          postalBlock.innerHTML +=
+            '<div class="postal post' +
+            (idx + 1) +
+            '"><img src="/postales/Amor/gato_01.png"' +
+            ' alt="' +
+            idx +
+            '"> </div>';
+          console.log(postal);
+        });
+        page += 1;
+        postalCharger.appendChild(postalBlock);
+      }
+    })
+    .catch(function(err) {
+      console.log(err);
+      setTimeout(cargaPostales, 2000);
+    })
+    .then(function() {
+      //Codigo a ejecutarse sin importar nada
+    });
 }
 window.addEventListener("scroll", () => {
   let { scrollTop, scrollHeight, clientHeight } = document.documentElement;
@@ -114,20 +120,25 @@ window.addEventListener("scroll", () => {
   }
 });
 
-categorias.forEach((categoria,idx)=>{
-  let htmlCategory
-  if(categoria=="Fechas Festivas"){
-    htmlCategory=document.getElementById("catFechas")
+categorias.forEach((categoria, idx) => {
+  let htmlCategory;
+  if (categoria == "Fechas Festivas") {
+    htmlCategory = document.getElementById("catFechas");
+  } else {
+    htmlCategory = document.getElementById("cat" + categoria);
   }
-  else{
-  htmlCategory=document.getElementById("cat"+categoria)}
-    htmlCategory.addEventListener("click",()=>{
-    page=0 
-    filter={categoria:categoria}
-    postalCharger.innerHTML=""
-    cargaPostales()
-})
-})  
+  htmlCategory.addEventListener("click", () => {
+    page = 0;
+    if(categoria == "All"){
+      filter={}
+    }
+    else{
+    filter = { categoria: categoria };
+    }
+    postalCharger.innerHTML = "";
+    cargaPostales();
+  });
+});
 /*)*/
 //e.preventDefault();
 //$.ajax({
@@ -241,3 +252,9 @@ document.addEventListener(
 span.addEventListener("click", () => {
   modal.style.display = "none";
 });
+document.getElementById("enviar").addEventListener("click",()=>{
+
+  //axios.get("/envios",{postal:})
+   
+})
+

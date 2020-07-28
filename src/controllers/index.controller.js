@@ -15,7 +15,7 @@ static async getPostales  (req,res){
 
 static renderFormulario(req,res){
 
-  res.render('formulario', {registro:true})  
+  res.render('formulario', {noButtons:true})  
 }
 
 

@@ -54,7 +54,49 @@ static logIn(req,res) {
   })(req, res);  
 }
 static renderEnvio(req,res){
-  res.render('usuario/envio')
+  res.render('usuario/envio',{noButtons:true})
+}
+static prueba(req,res){
+const nodemailer = require("nodemailer");
+console.log("Saludoe")
+// async..await is not allowed in global scope, must use a wrapper
+async function main() {
+   
+  let transporter = nodemailer.createTransport({
+    service:"gmail",
+    auth:{
+	user: 'Cardaway.sender@gmail.com',
+        pass: 'hola1234#'
+    }
+  });
+  let htmlTemplate=`
+  <html>
+  <head>
+<style>
+  h1 {color:red;}
+</style>
+  </head>
+  <body>
+    <h1>A Blue Heading</h1> 
+  </body>
+  </html>`
+  // send mail with defined transport object
+  let info = await transporter.sendMail({
+    from: '"Cardaway 📨" <Cardaway.sender@gmail.com>', // sender address
+    to: "bar@example.com, hadad.bautista@gmail.com", // list of receivers
+    subject: "Postal Cardaway ✉️✉️ 📬", // Subject line
+    html:htmlTemplate , // html body
+  });
+
+  console.log("Message sent: %s", info.messageId);
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+  // Preview only available when sending through an Ethereal account
+  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+}
+  main();
+  res.json({"succes":"nice"})
 }
 
 }
