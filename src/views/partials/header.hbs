@@ -2,23 +2,35 @@
 <header>
   <nav>
     <div class="nav-wrapper">
-      <a href="/" class="brand-logo">
-        CARDAWAY
-      </a>
+      {{#if admin}}
+        <a href="/" class="brand-logo">
+          CARDAWAY-MyAdmin
+        </a>
+      {{else}}
+        <a href="/" class="brand-logo">
+          CARDAWAY
+        </a>
+      {{/if}}
       <a href="#" data-target="mobile-demo" class="sidenav-trigger">
         <i class="material-icons">
           menu
         </i>
       </a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        {{!-- {{#if admin}}   --}}
-        {{!           <?php }}
-        {{! if (isset($_SESSION["admin"])) { }}
-        {{! echo '<li id="nav-li"><a href="./php/pages/admin.php"><button class="btn">Administracion</button></a></li>'; }}
-        {{! } }}
-        {{#if user}}
-          {{! if (!isset($_SESSION["usuario"])) { }}
-          {{! } else { }}
+        {{#if admin}}
+          <li id="nav-li">
+            <a href="/admin">
+              <button class="btn">
+                Administracion
+              </button>
+            </a>
+            <li id="nav-li">
+              <a href="./php/functions/cerrar_session.php">
+                Cerrar Sesión
+              </a>
+            </li>
+          </li>
+        {{else if user}}
           <li id="nav-li">
             <a href="./php/pages/user_page.php">
               Mi cuenta
@@ -30,35 +42,64 @@
             </a>
           </li>
         {{else if noButtons}}
-	
-	{{else}}
+
+        {{else}}
           <li id="nav-li">
             <a class="waves-effect waves-light btn modal-trigger" href="#login">
               Iniciar Sesion
             </a>
           </li>
           <li id="nav-li">
-            <a class="waves-effect waves-light btn modal-trigger" href="/Registro">
+            <a
+              class="waves-effect waves-light btn modal-trigger"
+              href="/Registro"
+            >
               Crea tu Cuenta
             </a>
           </li>
-
-          {{! } }}
-          {{! ?> }}
         {{/if}}
       </ul>
     </div>
   </nav>
   <ul class="sidenav" id="mobile-demo">
     <li id="nav-mobile" class="right hide-on-med-and-down">
-      {{!   <?php if (!isset($_SESSION["usuario"])) { }}
-      {{! echo '<li id="nav-li"><a class ="waves-effect waves-light btn modal-trigger" href="#login">Iniciar Sesion</a></li>'; }}
-      {{! echo '<li id="nav-li"><a class ="waves-effect waves-light btn modal-trigger" href="./php/pages/formulario.php">Crea tu Cuenta</a></li>'; }}
-      {{! } else { }}
-      {{! echo '<li id="nav-li"><a href="./php/pages/user_page.php">Mi cuenta</a></li>'; }}
-      {{! echo '<li id="nav-li"><a href="./php/functions/cerrar_session.php">Cerrar Sesión</a></li>'; }}
-      {{! } ?> }}
+      {{#if admin}}
+        <li id="nav-li">
+          <a href="/admin">
+              Administracion
+          </a>
+          <a href="./php/functions/cerrar_session.php">
+            Cerrar Sesión
+          </a>
+        </li>
+      {{else if user}}
+        <li id="nav-li">
+          <a href="./php/pages/user_page.php">
+            Mi cuenta
+          </a>
+        </li>
+        <li id="nav-li">
+          <a href="./php/functions/cerrar_session.php">
+            Cerrar Sesión
+          </a>
+        </li>
+      {{else if noButtons}}
+
+      {{else}}
+        <li id="nav-li">
+          <a class="modal-trigger" href="#login">
+            Iniciar Sesion
+          </a>
+        </li>
+        <li id="nav-li">
+          <a
+            class="modal-trigger"
+            href="/Registro"
+          >
+            Crea tu Cuenta
+          </a>
+        </li>
+      {{/if}}
     </li>
   </ul>
 </header>
-

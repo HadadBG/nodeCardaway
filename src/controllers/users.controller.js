@@ -1,5 +1,136 @@
 import usuariosDao from "../dao/usersDAO.js"
+import adminDao from "../dao/adminDao.js"
 import passport from "passport"
+const nodemailer = require("nodemailer");
+var path = require("path"); 
+  
+
+export default class  userController{
+static async agregarUsuario (req, res) {
+  console.log(req)
+  let result=validarCampos(req.body)
+  if(result.errors.length == 0){
+    try{
+  let response=await usuariosDao.insertUsuario(result.json)
+    }catch(e){
+      result.errors.push({id:"correo",msg:"Correo electronico ya registrado"})
+    } 
+  }
+  res.json({errors:result.errors});
+  
+};
+static logIn(req,res) {
+  console.log(req.body.username)
+  console.log(req.body.password)
+ if(!(req.body.username && req.body.password)){
+   return res.json({success:false,msg:"Ocurrio un error"})
+ }
+  if(adminDao.isAdmin({username:req.body.username,password:req.body.password})){
+    req.session.admin=true
+    return res.json({success:true,msg:req.body.username})
+  }
+  passport.authenticate('local', function(err, user, info) {
+    if (err) {  return res.json(err) }
+    if (!user) {  return res.json(info); }
+    req.logIn(user, function(err) {
+      if(err){
+	return res.json(err)
+      }
+	return res.json(info) 
+    });
+  })(req, res);  
+}
+static renderEnvio(req,res){
+  res.render('usuario/envio',{noButtons:true})
+}
+static prueba(req,res){
+   enviaCorreo();
+  res.json({"succes":"nice"})
+}
+
+}
+
+async function enviaCorreo() {
+  let transporter = nodemailer.createTransport({
+    service:"gmail",
+    auth:{
+	user: 'Cardaway.sender@gmail.com',
+        pass: 'hola1234#'
+    }
+  });
+  let htmlTemplate=`
+  <html>
+  <head>
+ 
+<style>
+.postal{
+ margin:auto; 
+}
+.nav-wrapper {
+  background-color: #23374b;
+}
+h1{
+color: #039be5;
+margin-bottom:2rem;
+}
+.nav-wrapper img{
+  margin-left:2rem;
+}
+
+.imgContainer{
+    text-align:center;
+}
+.imgContainer img{
+  margin:2rem;
+  width: 70%;
+  height: 100%;
+  object-fit: cover;
+
+}
+
+.margin{
+  width:100%;
+}
+</style>
+  </head>
+  <body>
+  <header>
+  <nav>
+    <div class="nav-wrapper">
+    <img src="cid:logo" alt="">
+    </div>
+  </nav>
+
+  </header>
+<div class="imgContainer">    
+<img class="postal" src="cid:postal" alt="header">
+</div>
+<div class="imgContainer">
+  <h1>Gracias por usar Cardaway</h1>  
+</div>
+  <img class="margin" src="https://www.filepicker.io/api/file/UOesoVZTFObSHCgUDygC" alt="">  
+
+  </body>
+  </html>`
+  // send mail with defined transport object
+  let info = await transporter.sendMail({
+    from: '"Cardaway 📨" <Cardaway.sender@gmail.com>', // sender address
+    to: "hadad.bautista@gmail.com", // list of receivers
+    subject: "Postal Cardaway ✉️✉️ 📬",
+    attachments: [{
+     filename: 'postal.png',
+     path: path.resolve('./src/public/postales/Amor/gato_01.png'),
+     cid: 'postal' //my mistake was putting "cid:logo@cid" here! 
+},{
+     filename: 'Logo.png',
+     path: path.resolve('./src/public/images/logo.png'),
+     cid: 'logo' //my mistake was putting "cid:logo@cid" here! 
+}], // Subject line
+    html:htmlTemplate , // html body
+  });
+
+}
+
 function validarCampos(json){
   let ret={}
   ret["errors"]=[]
@@ -25,81 +156,4 @@ function validarCampos(json){
    }
   return ret
 }
-
-export default class  userController{
-static async agregarUsuario (req, res) {
-  console.log(req)
-  let result=validarCampos(req.body)
-  if(result.errors.length == 0){
-    try{
-  let response=await usuariosDao.insertUsuario(result.json)
-    }catch(e){
-      result.errors.push({id:"correo",msg:"Correo electronico ya registrado"})
-    } 
-  }
-  res.json({errors:result.errors});
-  
-};
-
-static logIn(req,res) {
-  passport.authenticate('local', function(err, user, info) {
-    if (err) {  return res.json(err) }
-    if (!user) {  return res.json(info); }
-    req.logIn(user, function(err) {
-      if(err){
-	return res.json(err)
-      }
-	return res.json(info) 
-    });
-  })(req, res);  
-}
-static renderEnvio(req,res){
-  res.render('usuario/envio',{noButtons:true})
-}
-static prueba(req,res){
-const nodemailer = require("nodemailer");
-console.log("Saludoe")
-// async..await is not allowed in global scope, must use a wrapper
-async function main() {
-   
-  let transporter = nodemailer.createTransport({
-    service:"gmail",
-    auth:{
-	user: 'Cardaway.sender@gmail.com',
-        pass: 'hola1234#'
-    }
-  });
-  let htmlTemplate=`
-  <html>
-  <head>
-<style>
-  h1 {color:red;}
-</style>
-  </head>
-  <body>
-    <h1>A Blue Heading</h1> 
-  </body>
-  </html>`
-  // send mail with defined transport object
-  let info = await transporter.sendMail({
-    from: '"Cardaway 📨" <Cardaway.sender@gmail.com>', // sender address
-    to: "bar@example.com, hadad.bautista@gmail.com", // list of receivers
-    subject: "Postal Cardaway ✉️✉️ 📬", // Subject line
-    html:htmlTemplate , // html body
-  });
-
-  console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
-  // Preview only available when sending through an Ethereal account
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-}
-  main();
-  res.json({"succes":"nice"})
-}
-
-}
-
-
 

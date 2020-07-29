@@ -38,6 +38,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use((req, res, next) => {
+  res.locals.admin = req.session.admin || null;
   res.locals.user = req.user || null;
   next();
 });
@@ -46,6 +47,7 @@ app.use((req, res, next) => {
 app.set('view engine', '.hbs');
 app.use(require ('./routes/index.routes.js'));
 app.use(require('./routes/users.routes.js'))
+app.use(require('./routes/admin.routes.js'))
 
 console.log("Sessions configured")
 })

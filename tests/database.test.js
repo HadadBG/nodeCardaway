@@ -1,11 +1,13 @@
 import PostalesDAO from "../src/dao/postalesDAO"
 import UsuariosDAO from "../src/dao/usersDAO.js"
+import AdminDAO from "../src/dao/adminDao.js"
 let insertedIds
 let usuarioId
 describe("DatabaseTest", () => {
   beforeAll(async () => {
     await UsuariosDAO.injectDB(global.cardawayClient) 
     await PostalesDAO.injectDB(global.cardawayClient)
+    await AdminDAO.injectDB(global.cardawayClient)
   })
 
   test("Can insert many postales", async () => {
@@ -52,5 +54,27 @@ describe("DatabaseTest", () => {
     const deleteResult = await UsuariosDAO.deleteUsuario(usuarioId)
     expect(deleteResult.errors).toBeUndefined()  
     expect(deleteResult.n).toEqual(1)
+  })
+  test("Can Insert an Admin",async ()=>{
+    const testAdmin = {
+      _id:"admin2",
+      password:"admin"
+    }
+    const insertResult = await AdminDAO.insertAdmin(testAdmin)
+    expect(insertResult.insertedId).toEqual("admin2") 
+  })
+  test("Authentificate an Admin",async()=>{
+    let result = await AdminDAO.isAdmin({username:"admino",password:"admin"})
+    expect(result.loginResult).toEqual(-1) 
+    result = await AdminDAO.isAdmin({username:"admin2",password:"admin"})
+    expect(result.loginResult).toEqual(1)
+     
+  })
+
+  test("Can Delete an Admin",async ()=>{
+    const result = await AdminDAO.deleteAdmin("admin2")
+    expect(result.deletedCount).toEqual(1)
+    
+
   })
 })
