@@ -1,30 +1,5 @@
-<!DOCTYPE html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Cardaway</title>
-       <link href="./../../fonts/fonts.css" rel="stylesheet" />
-    <link rel="stylesheet" href="./../../css/materialize.min.css" />
-    <link rel="stylesheet" href="./../../css/style.css" />
-    <link rel="stylesheet" href="./../../css/user_style.css" />
-        </head>
-  <body>
-    <header>
-      <div class="row navbar-fixed">
-        <nav>
-          <div class="nav-wrapper">
-            <a href="./../../" class="brand-logo">CARDAWAY-MyAdmin</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-              <li id="nav-li">
-                <a href="./../functions/cerrar_session_admin.php">Cerrar Sesion</a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-    </header>
-
+<link rel="stylesheet" href="css/admin.css">  
+<body>
     <div class="row">
       <div class="col s12">
         <ul class="tabs #e0f7fa cyan lighten-5">
@@ -48,18 +23,12 @@
     {{!-- ?> --}}
 
       <div class="container">
-        <br /><br /><br />
-        <form class="center">
-          <a
-            button
-            class="waves-effect btn-large modal-trigger #1565c0 blue darken-3"
-            href="#modal1"
-            >Eliminar Usuario</a
-          >
-        </form>
-        <br />
+<div class="input-field  div-search">
+          <input  placeholder="Busqueda" id="first_name" type="text" class="validate search">
+  <i class="material-icons">search</i>
+        </div>
 
-        <div class="row">
+            <div class="row">
           <div class="col s12 center">
             <table class="striped" id="mitabla">
               <thead>
@@ -69,7 +38,7 @@
                   <th class="card-panel #80deea cyan lighten-3">Nacimiento</th>
                 </tr>
               </thead>
-
+		    
         {{!--       <?php  --}}
                     {{!-- while($consulta = mysqli_fetch_array($res)){ --}}
                 {{!-- ?> --}}
@@ -87,35 +56,7 @@
         </div>
       </div>
 
-      <div id="modal1" class="modal">
-        <div class="modal-content">
-          <h6>confirmar</h6>
-          <br />
-          <form id="cambios">
-            <div class="row">
-              <div class="input-field col s6">
-                <i class="fas fa-envelope prefix"></i>
-                <input
-                  type="text"
-                  id="correo"
-                  name="email"
-                  data-validetta="required"
-                />
-                <label for="usuario">Email</label>
-              </div>
-
-              <div class="col">
-                <div class="modal-footer">
-                  <button class="btn #80deea cyan lighten-3" type="submit">
-                    Eliminar
-                  </button>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+          </div>
 
     <div id="test2" class="col s12">
       <div class="container">
@@ -259,17 +200,10 @@
     </div>
   </body>
 
-    <script>
-    $(document).ready(function() {
-      $(".modal").modal();
-      $(".tabs").tabs();
-    });
-    </script>
-    <script src="./../../js/admin.js"></script>
+    <script src="js/admin.js"></script>
     <script src="./../../js/borrarPostal.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.all.min.js"></script>
 
 
 
-</html>
