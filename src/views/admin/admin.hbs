@@ -1,209 +1,272 @@
-<link rel="stylesheet" href="css/admin.css">  
+<link rel="stylesheet" href="css/admin.css" />
 <body>
-    <div class="row">
-      <div class="col s12">
-        <ul class="tabs #e0f7fa cyan lighten-5">
-          <li class="tab col s3"><a href="#test1">Usuarios</a></li>
-          <li class="tab col s3"><a href="#test2">Postales</a></li>
-          <li class="tab col s3"><a href="#test3">Estadisticas</a></li>
-          <li class="tab col s3">
-            <a href="./../functions/generar_pdf.php" target="_blank "
-              >Generar Reporte</a
-            >
-          </li>
-        </ul>
+  <div class="row">
+    <div class="col s12">
+      <ul class="tabs #e0f7fa cyan lighten-5">
+        <li class="tab col s3">
+          <a href="#test1">
+            Usuarios
+          </a>
+        </li>
+        <li class="tab col s3">
+          <a href="#test2">
+            Postales
+          </a>
+        </li>
+        <li class="tab col s3">
+          <a href="#test3">
+            Estadisticas
+          </a>
+        </li>
+        <li class="tab col s3">
+          <a href="./../functions/generar_pdf.php" target="_blank">
+            Generar Reporte
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div id="test1" class="col s12">
+    {{!     <?php  }}
+    {{! include("./../functions/conexion.php"); }}
+
+    {{! $sql = "SELECT * FROM usuarios"; }}
+    {{! $res = mysqli_query($conexion,$sql); }}
+    {{! ?> }}
+
+    <div class="container">
+      <div class="tabla-header">
+        <p class="titulo">
+          Usuarios
+        </p>
+        <div class="div-search">
+          <input placeholder="Busqueda" type="text" class="search" />
+          <button>
+            <i class="material-icons">
+              search
+            </i>
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12 center">
+          <table class="highlight" id="mitabla">
+            <thead>
+              <tr>
+                <th>
+                  Foto
+                </th>
+                <th>
+                  Nombre
+                </th>
+                <th>
+                  Correo
+                </th>
+                <th>
+                  Nacimiento
+                </th>
+		<th>Acción</th>
+              </tr>
+            </thead>
+
+            {{!       <?php  }}
+            {{! while($consulta = mysqli_fetch_array($res)){ }}
+            {{! ?> }}
+
+            <tr>
+	      <tr>
+		<th class="imgContainer"><img src="postales/Amor/kenny.gif" alt="algo"> </th>
+	        <th class="nombre">Hadad</th>
+	        <th class="correo">hadad.bautista@gmail.con</th>
+	        <th class="nacimiento">20/08/99</th>
+		<th class="icono"><i class="material-icons">delete</i></th>
+	      </tr>  
+              {{! <td><?php echo $consulta['nombre']?></td> }}
+
+              {{! <td><?php echo $consulta['correo']?></td> }}
+              {{! <td><?php echo $consulta['fecha_nac']?></td> }}
+            </tr>
+
+            {{! <?php }?> }}
+          </table>
+        </div>
       </div>
     </div>
-    <div id="test1" class="col s12">
-  {{!--     <?php  --}}
-    {{!-- include("./../functions/conexion.php"); --}}
+  </div>
 
-    {{!-- $sql = "SELECT * FROM usuarios"; --}}
-    {{!-- $res = mysqli_query($conexion,$sql); --}}
-    {{!-- ?> --}}
-
-      <div class="container">
-<div class="input-field  div-search">
-          <input  placeholder="Busqueda" id="first_name" type="text" class="validate search">
-  <i class="material-icons">search</i>
-        </div>
-
-            <div class="row">
-          <div class="col s12 center">
-            <table class="striped" id="mitabla">
-              <thead>
-                <tr>
-                  <th class="card-panel #80deea cyan lighten-3">Nombre</th>
-                  <th class="card-panel #80deea cyan lighten-3">Correo</th>
-                  <th class="card-panel #80deea cyan lighten-3">Nacimiento</th>
-                </tr>
-              </thead>
-		    
-        {{!--       <?php  --}}
-                    {{!-- while($consulta = mysqli_fetch_array($res)){ --}}
-                {{!-- ?> --}}
-
-              <tr>
-                <td><?php echo $consulta['nombre']?></td>
-
-                <td><?php echo $consulta['correo']?></td>
-                <td><?php echo $consulta['fecha_nac']?></td>
-              </tr>
-
-              <?php }?>
-            </table>
+  <div id="test2" class="col s12">
+    <div class="container">
+      <form id="form_postal" enctype="multipart/form-data">
+        <div class="row">
+          <div class="file-field input-field col s6">
+            <div class="btn">
+              <span>
+                Agregar Postal
+              </span>
+              <input type="file" name="uploadedFile" id="uploadedFile" />
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" />
+            </div>
           </div>
+          <div class="input-field col s6">
+            <select id="selector">
+              <option value="Amor">
+                Amor
+              </option>
+              <option value="Fechas_fest">
+                Fechas Festivas
+              </option>
+              <option value="Paisajes">
+                Paisajes
+              </option>
+              <option value="Comida">
+                Comida
+              </option>
+              <option value="Vintage">
+                Vintage
+              </option>
+              <option value="Otros">
+                Otros
+              </option>
+            </select>
+            <label>
+              Categoria
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s6">
+            <button type="submit" name="action" class="btn">
+              Guardar Cambios
+            </button>
+          </div>
+          <a class="right">
+            *Formatos Aceptados:(gif,jpg,png)
+          </a>
+        </div>
+      </form>
+
+      <form class="center">
+        <a
+          button
+          class="waves-effect btn-large modal-trigger #1565c0 blue darken-3"
+          href="#modal2"
+        >
+          Eliminar postal
+        </a>
+      </form>
+      <br />
+      <!-- aqui va conexion-->
+      {{! <?php  }}
+      {{! $sql2 = "SELECT *FROM postales"; }}
+      {{! $res2 = mysqli_query($conexion,$sql2); }}
+
+      {{! ?> }}
+      <div class="row">
+        <div class="col s12">
+          <table class="striped">
+            <thead>
+              <tr>
+                <th class="card-panel #80deea cyan lighten-3">
+                  Id
+                </th>
+                <th class="card-panel #80deea cyan lighten-3">
+                  postal
+                </th>
+              </tr>
+            </thead>
+
+            {{! <?php  }}
+
+            {{! while($img = mysqli_fetch_array($res2)){ }}
+
+            {{! ?> }}
+
+            {{! <tr> }}
+            {{! <td><?php echo $img['id_postal'] ?></td> }}
+            {{! <td><?php echo $img['img']?></td> }}
+            {{! </tr> }}
+            {{! <?php }?> }}
+          </table>
         </div>
       </div>
+    </div>
+  </div>
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+      <h6>
+        Confirmacion
+      </h6>
 
+      <form id="imagenes">
+        <div class="row">
+          <div class="input-field col s5">
+            <i class="far fa-images prefix"></i>
+            <input
+              type="text"
+              id="imagen"
+              name="imagen"
+              data-validetta="required"
+            />
+            <label for="imagen">
+              nombre-imagen
+            </label>
           </div>
 
-    <div id="test2" class="col s12">
-      <div class="container">
-        <form  id="form_postal" enctype="multipart/form-data">
-          <div class="row">
-            <div class="file-field input-field col s6">
-              <div class="btn">
-                <span>Agregar Postal</span>
-                <input type="file" name="uploadedFile" id="uploadedFile" />
-              </div>
-              <div class="file-path-wrapper">
-                <input class="file-path validate" type="text" />
-              </div>
-            </div>
-            <div class="input-field col s6">
-              <select id="selector">
-                <option value="Amor">Amor</option>
-                <option value="Fechas_fest">Fechas Festivas</option>
-                <option value="Paisajes">Paisajes</option>
-                <option value="Comida">Comida</option>
-                <option value="Vintage">Vintage</option>
-                <option value="Otros">Otros</option>
-              </select>
-              <label>Categoria</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col s6">
-              <button type="submit" name="action" class="btn">
-                Guardar Cambios
+          <div class="col">
+            <div class="modal-footer">
+              <button class="btn #80deea cyan lighten-3" type="submit">
+                Eliminar
               </button>
             </div>
-            <a class="right"
-              >*Formatos Aceptados:(gif,jpg,png) 
-            </a>
-          </div>
-        </form>
-
-        <form class="center">
-          <a
-            button
-            class="waves-effect btn-large modal-trigger #1565c0 blue darken-3"
-            href="#modal2"
-            >Eliminar postal</a
-          >
-        </form>
-        <br />
-        <!-- aqui va conexion-->
-        {{!-- <?php  --}}
-            {{!-- $sql2 = "SELECT *FROM postales"; --}}
-            {{!-- $res2 = mysqli_query($conexion,$sql2); --}}
-
-            {{!-- ?> --}}
-        <div class="row">
-          <div class="col s12">
-            <table class="striped">
-              <thead>
-                <tr>
-                  <th class="card-panel #80deea cyan lighten-3">Id</th>
-                  <th class="card-panel #80deea cyan lighten-3">postal</th>
-                </tr>
-              </thead>
-
-              {{!-- <?php  --}}
-                  
-                  {{!-- while($img = mysqli_fetch_array($res2)){ --}}
-                
-                 {{!-- ?> --}}
-
-              {{!-- <tr> --}}
-                {{!-- <td><?php echo $img['id_postal'] ?></td> --}}
-                {{!-- <td><?php echo $img['img']?></td> --}}
-              {{!-- </tr> --}}
-              {{!-- <?php }?> --}}
-            </table>
           </div>
         </div>
-      </div>
-    </div>
-    <div id="modal2" class="modal">
-      <div class="modal-content">
-        <h6>Confirmacion</h6>
-
-        <form id="imagenes">
-          <div class="row">
-            <div class="input-field col s5">
-              <i class="far fa-images prefix"></i>
-              <input
-                type="text"
-                id="imagen"
-                name="imagen"
-                data-validetta="required"
-              />
-              <label for="imagen">nombre-imagen</label>
-            </div>
-
-            <div class="col">
-              <div class="modal-footer">
-                <button class="btn #80deea cyan lighten-3" type="submit">
-                  Eliminar
-                </button>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-
-
-    <div id="test3" class="col s12">
-      <form class="center-align">
-        <a
-          button
-          class="btn-large #1565c0 blue darken-3"
-          href="../functions/grafica_categorias_mas_gustadas.php"
-          target="_blank"
-          >Categorias mas gustadas</a
-        >
-        <a
-          button
-          class="btn-large #1565c0 blue darken-3"
-          href="../functions/grafica_envios_semanales.php"
-          target="_blank"
-          >Envios semanales</a
-        >
-        <a
-          button
-          class="btn-large #1565c0 blue darken-3"
-          href="../functions/grafica_generos.php"
-          target="_blank"
-          >Genero</a
-        >
-        <a
-          button
-          class="btn-large #1565c0 blue darken-3"
-          href="../functions/grafica_postales_mas_gustadas.php"
-          target="_blank"
-          >Postales mas gustadas</a
-        >
       </form>
     </div>
-  </body>
+  </div>
 
-    <script src="js/admin.js"></script>
-    <script src="./../../js/borrarPostal.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.all.min.js"></script>
+  <div id="test3" class="col s12">
+    <form class="center-align">
+      <a
+        button
+        class="btn-large #1565c0 blue darken-3"
+        href="../functions/grafica_categorias_mas_gustadas.php"
+        target="_blank"
+      >
+        Categorias mas gustadas
+      </a>
+      <a
+        button
+        class="btn-large #1565c0 blue darken-3"
+        href="../functions/grafica_envios_semanales.php"
+        target="_blank"
+      >
+        Envios semanales
+      </a>
+      <a
+        button
+        class="btn-large #1565c0 blue darken-3"
+        href="../functions/grafica_generos.php"
+        target="_blank"
+      >
+        Genero
+      </a>
+      <a
+        button
+        class="btn-large #1565c0 blue darken-3"
+        href="../functions/grafica_postales_mas_gustadas.php"
+        target="_blank"
+      >
+        Postales mas gustadas
+      </a>
+    </form>
+  </div>
+</body>
 
-
-
+<script src="js/admin.js"></script>
+<script src="./../../js/borrarPostal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/8.11.8/sweetalert2.all.min.js"
+></script>

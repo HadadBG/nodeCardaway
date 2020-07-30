@@ -9,3 +9,85 @@ ul.tabs div.indicator {
 .tabs{
   margin:20px 0;
 }
+.container{
+  width:90%;
+  max-width:none;
+  padding:1rem 3rem;
+ background-color:#E0F7FA;
+ height:75vh;
+ 
+
+}
+.tabla-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  overflow:hidden;
+  padding:1rem 0;
+}
+.div-search{
+  display:flex;
+  text-align:center;
+}
+
+.div-search button{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+  width:20%;
+ border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none; float:right;
+}
+.div-search i{
+  color:#226fbb;
+}
+/* label underline focus color */
+.search:focus {
+  border-bottom: 1px solid #226fbb !important;
+}
+.search{
+
+  border-bottom:0.2rem solid #23374B;
+  margin:0;
+  float:left;
+  width:80% !important;
+}
+.titulo{
+  font-size:1.8rem;
+  color:#226fbb;
+}
+/*Tabla Primera Seccion*/
+.imgContainer{
+  height:15vh;
+  padding:0;
+  width:15%;
+}
+.imgContainer img{
+vertical-align:top;
+  height:15vh;
+  width:50%;
+
+}
+.nombre{
+  width:20%;
+}
+.correo{
+  width:30%;
+}
+.nacimiento{
+  width:20%;
+}
+.icono{
+  width:15%;
+}
+.icono i{
+  color:#EC5F67;
+  font-size:4vh;
+}
+.icono i:hover{
+  cursor:pointer;
+}
+th{
+  text-align:center;
+}
