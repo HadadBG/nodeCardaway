@@ -1,7 +1,5 @@
 <link rel="stylesheet" href="css/admin.css" />
 <body>
-  <div class="row">
-    <div class="col s12">
       <ul class="tabs #e0f7fa cyan lighten-5">
         <li class="tab col s3">
           <a href="#test1">
@@ -24,8 +22,6 @@
           </a>
         </li>
       </ul>
-    </div>
-  </div>
   <div id="test1" class="col s12">
     {{!     <?php  }}
     {{! include("./../functions/conexion.php"); }}
@@ -50,19 +46,19 @@
       </div>
       <div class="row">
         <div class="col s12 center">
-          <table class="highlight" id="mitabla">
+          <table class="highlight " id="mitabla">
             <thead>
               <tr>
-                <th>
+                <th class="headFoto">
                   Foto
                 </th>
-                <th>
+                <th class="headNombre">
                   Nombre
                 </th>
-                <th>
+                <th class="headCorreo">
                   Correo
                 </th>
-                <th>
+                <th class="headNac">
                   Nacimiento
                 </th>
 		<th>Acción</th>
@@ -73,7 +69,6 @@
             {{! while($consulta = mysqli_fetch_array($res)){ }}
             {{! ?> }}
 
-            <tr>
 	      <tr>
 		<th class="imgContainer"><img src="postales/Amor/kenny.gif" alt="algo"> </th>
 	        <th class="nombre">Hadad</th>
@@ -81,11 +76,31 @@
 	        <th class="nacimiento">20/08/99</th>
 		<th class="icono"><i class="material-icons">delete</i></th>
 	      </tr>  
+		      <tr>
+		<th class="imgContainer"><img src="postales/Amor/kenny.gif" alt="algo"> </th>
+	        <th class="nombre">Hadad</th>
+	        <th class="correo">hadad.bautista@gmail.con</th>
+	        <th class="nacimiento">20/08/99</th>
+		<th class="icono"><i class="material-icons">delete</i></th>
+	      </tr>       <tr>
+		<th class="imgContainer"><img src="postales/Amor/kenny.gif" alt="algo"> </th>
+	        <th class="nombre">Hadad</th>
+	        <th class="correo">hadad.bautista@gmail.con</th>
+	        <th class="nacimiento">20/08/99</th>
+		<th class="icono"><i class="material-icons">delete</i></th>
+	      </tr> 
+	      <tr>
+		<th class="imgContainer"><img src="postales/Amor/kenny.gif" alt="algo"> </th>
+	        <th class="nombre">Hadad</th>
+	        <th class="correo">hadad.bautista@gmail.con</th>
+	        <th class="nacimiento">20/08/99</th>
+		<th class="icono"><i class="material-icons">delete</i></th>
+	      </tr> 
+
               {{! <td><?php echo $consulta['nombre']?></td> }}
 
               {{! <td><?php echo $consulta['correo']?></td> }}
               {{! <td><?php echo $consulta['fecha_nac']?></td> }}
-            </tr>
 
             {{! <?php }?> }}
           </table>

@@ -17,7 +17,31 @@
         </i>
       </a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        {{#if admin}}
+        {{#if noButtons}}
+          {{#if admin}}
+            <li id="nav-li">
+              <i class="material-icons">
+                people_alt
+              </i>
+            </li>
+
+            <li id="nav-li">
+              <i class="material-icons">
+                local_post_office
+              </i>
+            </li>
+            <li id="nav-li">
+              <i class="material-icons">
+                bar_chart
+              </i>
+            </li>
+            <li id="nav-li">
+              <a href="./php/functions/cerrar_session.php">
+                Cerrar Sesión
+              </a>
+            </li>
+          {{/if}}
+        {{else if admin}}
           <li id="nav-li">
             <a href="/admin">
               <button class="btn">
@@ -41,8 +65,6 @@
               Cerrar Sesión
             </a>
           </li>
-        {{else if noButtons}}
-
         {{else}}
           <li id="nav-li">
             <a class="waves-effect waves-light btn modal-trigger" href="#login">
@@ -63,13 +85,33 @@
   </nav>
   <ul class="sidenav" id="mobile-demo">
     <li id="nav-mobile" class="right hide-on-med-and-down">
-      {{#if admin}}
+      {{#if noButtons}}
+        {{#if admin}}
+          <li id="nav-li">
+            <a href="/admin">
+              Usuarios
+            </a>
+          </li>
+          <li>
+            <a href="./php/functions/cerrar_session.php">
+              Postales
+            </a>
+          </li>
+          <li>
+            <a href="./php/functions/cerrar_session.php">
+              Estadisticas
+            </a>
+          </li>
+        {{/if}}
+      {{else if admin}}
         <li id="nav-li">
           <a href="/admin">
-              Administracion
+            Administracion
           </a>
+        </li>
+        <li>
           <a href="./php/functions/cerrar_session.php">
-            Cerrar Sesión
+            Cerrar Sesion
           </a>
         </li>
       {{else if user}}
@@ -92,10 +134,7 @@
           </a>
         </li>
         <li id="nav-li">
-          <a
-            class="modal-trigger"
-            href="/Registro"
-          >
+          <a class="modal-trigger" href="/Registro">
             Crea tu Cuenta
           </a>
         </li>

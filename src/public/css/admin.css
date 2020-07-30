@@ -1,3 +1,15 @@
+/*header-icons*/
+#nav-li {
+  margin:0 0.5rem;
+
+}
+#nav-li i:hover{
+  cursor:pointer;
+}
+.tabs{
+  height:0;
+  margin:0 !important;
+}
 .tabs .tab a {
   font-weight: 800;
   color: black; /*cambiamos el color de la letra*/
@@ -10,11 +22,12 @@ ul.tabs div.indicator {
   margin:20px 0;
 }
 .container{
+  margin-top:2vh;
   width:90%;
   max-width:none;
   padding:1rem 3rem;
  background-color:#E0F7FA;
- height:75vh;
+ height:87vh;
  
 
 }
@@ -58,6 +71,9 @@ ul.tabs div.indicator {
   color:#226fbb;
 }
 /*Tabla Primera Seccion*/
+#mitabla{
+  overflow:hidden;
+}
 .imgContainer{
   height:15vh;
   padding:0;
@@ -90,4 +106,31 @@ vertical-align:top;
 }
 th{
   text-align:center;
+}
+@media (max-width: 800px) {
+  .nombre{
+    display:none;
+  }
+  .headNombre{
+    display:none;
+  }
+  .imgContainer{
+    display:none;
+  }
+  .headFoto{
+    display:none;
+  }
+  .nacimiento{
+    display:none;
+  }
+  .headNac{
+    display:none;
+  }
+  .titulo{
+    width:100%;
+  }
+  .tabla-header{
+    justify-content:center;
+  }
+
 }

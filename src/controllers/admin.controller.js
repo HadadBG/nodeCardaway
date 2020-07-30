@@ -4,7 +4,7 @@ static renderAdmin (req, res) {
    res.redirect("/") 
   }
   //res.render('index');
-  res.render('admin/admin');
+  res.render('admin/admin',{noButtons:true});
 };
 
 
