@@ -5,5 +5,6 @@ const router = express.Router();
 import controller from  "../controllers/admin.controller.js"
 
 router.get("/admin", controller.renderAdmin);
+router.get("/getUsuarios", controller.getUsuarios)
 
 module.exports =  router;

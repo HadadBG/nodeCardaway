@@ -60,7 +60,6 @@ document.addEventListener(
   "click",
   function(event) {
     if (event.target.matches(".gal-img")) {
-      console.log("hola");
       modal.style.display = "block";
       modalImg.src = event.target.src;
       if (modalImg.height > modalImg.width) {
@@ -83,7 +82,8 @@ function cargaPostales() {
     .get("/getPostales", {
       params: {
         page: page,
-        filter: filter
+        filter: filter,
+	postalesPerPage:9
       }
     })
     .then(function(res) {

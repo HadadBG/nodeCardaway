@@ -31,7 +31,7 @@ describe("DatabaseTest", () => {
     const testUsuario = {
       _id:"test@test.test",
       nombre:"Hadad",
-      primerAp:"Bautista",
+      primerAp:"cadenadetesteo",
       segundoAP:"García",
       genero:"Hombre",
       fechaNac: "1999-08-20",
@@ -49,6 +49,15 @@ describe("DatabaseTest", () => {
   test("Can get a user by Email",async ()=>{
     let usuario = await UsuariosDAO.getUsuario({email:"test@test.test"})
     expect(usuario.nombre).toEqual("Hadad")
+  })
+
+  test("Can get users by text search",async()=>{
+    let usuarios
+
+      usuarios =await UsuariosDAO.getUsuarios({textToSearch:"cadenadetesteo"})
+
+
+    expect(usuarios[0].nombre).toEqual("Hadad")
   })
   test("Can Delete a User",async ()=>{
     const deleteResult = await UsuariosDAO.deleteUsuario(usuarioId)

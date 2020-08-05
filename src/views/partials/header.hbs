@@ -20,21 +20,32 @@
         {{#if noButtons}}
           {{#if admin}}
             <li id="nav-li">
-              <i class="material-icons">
-                people_alt
-              </i>
+              <ul class="tabs">
+                <li class="tab" href="#test1">
+                  <a href="#test1">
+                    <i class="material-icons">
+                      people_alt
+                    </i>
+                  </a>
+                </li>
+
+                <li class="tab" href="#test2">
+                  <a href="#test2">
+                    <i class="material-icons">
+                      local_post_office
+                    </i>
+                  </a>
+                </li>
+                <li class="tab" href="test3">
+                  <a href="#test3">
+                    <i class="material-icons">
+                      bar_chart
+                    </i>
+                  </a>
+                </li>
+              </ul>
             </li>
 
-            <li id="nav-li">
-              <i class="material-icons">
-                local_post_office
-              </i>
-            </li>
-            <li id="nav-li">
-              <i class="material-icons">
-                bar_chart
-              </i>
-            </li>
             <li id="nav-li">
               <a href="./php/functions/cerrar_session.php">
                 Cerrar Sesión
@@ -83,6 +94,7 @@
       </ul>
     </div>
   </nav>
+
   <ul class="sidenav" id="mobile-demo">
     <li id="nav-mobile" class="right hide-on-med-and-down">
       {{#if noButtons}}

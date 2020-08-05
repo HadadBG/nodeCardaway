@@ -7,6 +7,7 @@ static renderIndex (req, res) {
 
 static async getPostales  (req,res){
   let reqJson={}
+  reqJson["postalesPerPage"]=parseInt(req.query.postalesPerPage)
   reqJson["page"]=parseInt(req.query.page)
   reqJson["filter"]=JSON.parse(req.query.filter)
   let postales= await PostalesDAO.getPostales(reqJson)
