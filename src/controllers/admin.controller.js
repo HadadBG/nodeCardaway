@@ -21,7 +21,7 @@ export default class adminController {
     let deleteResponse
     let responseJson={success:false}
     try{
-     deleteResponse=await usuariosDao.deleteUsuario(req.body.correo)
+     deleteResponse=await usuariosDao.deleteUsuario(req.query.correo)
     }
     catch(e){
       console.log(e)
