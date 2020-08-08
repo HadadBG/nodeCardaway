@@ -66,7 +66,7 @@ function zeller(y,m,d){
 function cumple(cad){
     let y,m,d
     [y,m,d]=cad.match(/(\d)+/g) 
-    return String.format("%02d",d)+"/"+String.format("%02",m)+"/"+y;
+    return d.padStart(2,"0")+"/"+m.padStart(2,"0")+"/"+y;
 }
 function genero(boole){
     if(boole){

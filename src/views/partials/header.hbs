@@ -1,24 +1,14 @@
 <link rel="stylesheet" href="/css/header.css" />
 <header>
-  <nav>
-    <div class="nav-wrapper">
-      {{#if admin}}
-        <a href="/" class="brand-logo">
-          CARDAWAY-MyAdmin
-        </a>
-      {{else}}
-        <a href="/" class="brand-logo">
-          CARDAWAY
-        </a>
-      {{/if}}
-      <a href="#" data-target="mobile-demo" class="sidenav-trigger">
-        <i class="material-icons">
-          menu
-        </i>
-      </a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        {{#if noButtons}}
-          {{#if admin}}
+  {{#if noButtons}}
+    <nav>
+      <div class="nav-wrapper">
+	{{#if admin}}
+<a href="/" class="brand-logo hide-on-med-and-down">
+            CARDAWAY-MyAdmin
+          </a>
+<a href="/"><i class="material-icons left arrowBack"> arrow_back</i></a>
+	  <ul class="right">
             <li id="nav-li">
               <ul class="tabs">
                 <li class="tab" href="#test1">
@@ -51,19 +41,86 @@
                 Cerrar Sesión
               </a>
             </li>
-          {{/if}}
-        {{else if admin}}
-          <li id="nav-li">
-            <a href="/admin">
-              <button class="btn">
-                Administracion
-              </button>
-            </a>
+          </ul>
+        {{/if}}
+      </div>
+    </nav>
+  {{else}}
+    <nav>
+      <div class="nav-wrapper">
+        {{#if admin}}
+          <a href="/" class="brand-logo">
+            CARDAWAY-MyAdmin
+          </a>
+        {{else}}
+          <a href="/" class="brand-logo">
+            CARDAWAY
+          </a>
+        {{/if}}
+
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger">
+          <i class="material-icons">
+            menu
+          </i>
+        </a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          {{#if admin}}
+            <li id="nav-li">
+              <a href="/admin">
+                <button class="btn">
+                  Administracion
+                </button>
+              </a>
+              <li id="nav-li">
+                <a href="./php/functions/cerrar_session.php">
+                  Cerrar Sesión
+                </a>
+              </li>
+            </li>
+          {{else if user}}
+            <li id="nav-li">
+              <a href="./php/pages/user_page.php">
+                Mi cuenta
+              </a>
+            </li>
             <li id="nav-li">
               <a href="./php/functions/cerrar_session.php">
                 Cerrar Sesión
               </a>
             </li>
+          {{else}}
+            <li id="nav-li">
+              <a
+                class="waves-effect waves-light btn modal-trigger"
+                href="#login"
+              >
+                Iniciar Sesion
+              </a>
+            </li>
+            <li id="nav-li">
+              <a
+                class="waves-effect waves-light btn modal-trigger"
+                href="/Registro"
+              >
+                Crea tu Cuenta
+              </a>
+            </li>
+          {{/if}}
+        </ul>
+      </div>
+    </nav>
+    <ul class="sidenav" id="mobile-demo">
+      <li id="nav-mobile" class="right hide-on-med-and-down">
+        {{#if admin}}
+          <li id="nav-li">
+            <a href="/admin">
+              Administracion
+            </a>
+          </li>
+          <li>
+            <a href="./php/functions/cerrar_session.php">
+              Cerrar Sesion
+            </a>
           </li>
         {{else if user}}
           <li id="nav-li">
@@ -76,81 +133,21 @@
               Cerrar Sesión
             </a>
           </li>
+        {{else if noButtons}}
+
         {{else}}
           <li id="nav-li">
-            <a class="waves-effect waves-light btn modal-trigger" href="#login">
+            <a class="modal-trigger" href="#login">
               Iniciar Sesion
             </a>
           </li>
           <li id="nav-li">
-            <a
-              class="waves-effect waves-light btn modal-trigger"
-              href="/Registro"
-            >
+            <a class="modal-trigger" href="/Registro">
               Crea tu Cuenta
             </a>
           </li>
         {{/if}}
-      </ul>
-    </div>
-  </nav>
-
-  <ul class="sidenav" id="mobile-demo">
-    <li id="nav-mobile" class="right hide-on-med-and-down">
-      {{#if noButtons}}
-        {{#if admin}}
-          <li id="nav-li">
-            <a href="/admin">
-              Usuarios
-            </a>
-          </li>
-          <li>
-            <a href="./php/functions/cerrar_session.php">
-              Postales
-            </a>
-          </li>
-          <li>
-            <a href="./php/functions/cerrar_session.php">
-              Estadisticas
-            </a>
-          </li>
-        {{/if}}
-      {{else if admin}}
-        <li id="nav-li">
-          <a href="/admin">
-            Administracion
-          </a>
-        </li>
-        <li>
-          <a href="./php/functions/cerrar_session.php">
-            Cerrar Sesion
-          </a>
-        </li>
-      {{else if user}}
-        <li id="nav-li">
-          <a href="./php/pages/user_page.php">
-            Mi cuenta
-          </a>
-        </li>
-        <li id="nav-li">
-          <a href="./php/functions/cerrar_session.php">
-            Cerrar Sesión
-          </a>
-        </li>
-      {{else if noButtons}}
-
-      {{else}}
-        <li id="nav-li">
-          <a class="modal-trigger" href="#login">
-            Iniciar Sesion
-          </a>
-        </li>
-        <li id="nav-li">
-          <a class="modal-trigger" href="/Registro">
-            Crea tu Cuenta
-          </a>
-        </li>
-      {{/if}}
-    </li>
-  </ul>
+      </li>
+    </ul>
+  {{/if}}
 </header>

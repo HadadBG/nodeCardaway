@@ -17,4 +17,18 @@ export default class adminController {
     let usuarios = await usuariosDao.getUsuarios(reqJson)
     res.json(usuarios)
   }
+  static async deleteUsuario(req,res){
+    let deleteResponse
+    let responseJson={success:false}
+    try{
+     deleteResponse=await usuariosDao.deleteUsuario(req.body.correo)
+    }
+    catch(e){
+      console.log(e)
+    }
+    if(deleteResponse.n == 1)
+      responseJson["success"]=true
+
+    res.json(responseJson)
+  }
 }

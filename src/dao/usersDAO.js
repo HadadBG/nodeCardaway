@@ -56,10 +56,9 @@ export default class UsuariosDAO {
       .find(
         {
           $or: [
-            { _id: { $regex:textToSearch } },
-            { nombre: { $regex:textToSearch  } },
-            { primerAp: { $regex:textToSearch  } },
-            { segundoAp: { $regex:textToSearch  } }
+            { _id: { $regex:textToSearch ,$options:'i'} },
+            { nombre: { $regex:textToSearch,$options:'i'  } },
+           
           ]
         },
         {

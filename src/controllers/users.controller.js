@@ -7,7 +7,6 @@ var path = require("path");
 
 export default class  userController{
 static async agregarUsuario (req, res) {
-  console.log(req)
   let result=validarCampos(req.body)
   if(result.errors.length == 0){
     try{
@@ -20,8 +19,6 @@ static async agregarUsuario (req, res) {
   
 };
 static logIn(req,res) {
-  console.log(req.body.username)
-  console.log(req.body.password)
  if(!(req.body.username && req.body.password)){
    return res.json({success:false,msg:"Ocurrio un error"})
  }

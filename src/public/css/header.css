@@ -35,3 +35,11 @@ html {
 .btn:hover {
   background-color: #1089ff;
 }
+.arrowBack{
+  margin-left:1rem;
+}
+@media(min-width:993px){
+  .arrowBack{
+    display:none !important;
+  }
+}
