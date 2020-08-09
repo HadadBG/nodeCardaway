@@ -4,6 +4,11 @@ var page = 0;
 var textToSearch = "";
 let cargadorU = document.getElementById("cargadorU");
 let buscadorU = document.getElementById("buscadorU");
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems, {});
+  });
 document.getElementById("leftArrow").addEventListener("click", () => {
   if (page != 0) {
     page -= 1;
@@ -16,6 +21,7 @@ document.getElementById("rightArrow").addEventListener("click", () => {
   cargaUsuarios();
   document.getElementById("noPage").innerText = page + 1;
 });
+
 document.addEventListener("DOMContentLoaded", function() {
   var elems = document.querySelectorAll(".modal");
   var instances = M.Modal.init(elems, {});

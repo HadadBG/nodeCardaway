@@ -217,3 +217,9 @@ th {
   width:33%;
 
 }
+.select-wrapper input.select-dropdown:focus{
+ border-bottom : 1px solid #226fbb;
+}
+.dropdown-content li > a, .dropdown-content li > span{
+  color:#226fbb;
+}
