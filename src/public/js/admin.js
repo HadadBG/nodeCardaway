@@ -2,6 +2,7 @@ var seccion = "usuarios";
 var usersPerPage = 4;
 var page = 0;
 var textToSearch = "";
+
 let cargadorU = document.getElementById("cargadorU");
 let buscadorU = document.getElementById("buscadorU");
 
@@ -68,9 +69,29 @@ function cargaUsuarios() {
               button.parentElement.parentElement.children[2].innerText;
 
             button.addEventListener("click", () => {
-              axios.delete("/deleteUsuario", {
-                data: "hola"
-              });
+              axios
+                .delete("/deleteUsuario", {
+                  params: {
+                    correo: correo,
+                  }
+                })
+                .then(res => {
+                  if (res.status == 200) {
+                    if (res.data.success) {
+		      cargaUsuarios()
+                      Swal.fire(
+                        "Cardaway",
+                        "Usuario Eliminado con exito",
+                        "success"
+                      );
+		      
+                    } else {
+                      Swal.fire("Cardaway", "Ocurrio un error", "error");
+                    }
+                  } else {
+                    Swal.fire("Cardaway", "Error de Conexion", "error");
+                  }
+                });
             });
           }
         );
