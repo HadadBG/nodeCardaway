@@ -2,7 +2,7 @@ var seccion = "usuarios";
 var usersPerPage = 4;
 var page = 0;
 var textToSearch = "";
-
+let formularioAddPostal = document.getElementById("formPostal")
 let cargadorU = document.getElementById("cargadorU");
 let buscadorU = document.getElementById("buscadorU");
 
@@ -124,3 +124,15 @@ function getUserRow(json) {
   return innerHTML;
 }
 cargaUsuarios();
+formularioAddPostal.addEventListener("submit",(e)=>{
+  e.preventDefault();
+  let formData=new FormData(formularioAddPostal[0]);
+  let nombreCat=document.getElementById("selector").value
+  formData.append("categoria",nombreCat)
+  axios.post("/insertPostal",formData,{ 
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  })
+})
+

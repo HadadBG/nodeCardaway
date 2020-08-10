@@ -15,7 +15,7 @@ export default class AdminDAO {
       );
     }
   }
-  static async isAdmin({ username, password }) {
+  static async login({ username, password }) {
   let admin = await admins.findOne({_id:username})
   if(admin == null){
     return {loginResult:-1,usuario:null}
