@@ -223,3 +223,10 @@ th {
 .dropdown-content li > a, .dropdown-content li > span{
   color:#226fbb;
 }
+.input-field textarea:focus {
+  border-bottom: 1px solid #226fbb !important;
+  box-shadow:0 0 0px 0 #226fbb !important;
+}.input-field textarea:focus + label {
+  color: #226fbb !important;
+}
+

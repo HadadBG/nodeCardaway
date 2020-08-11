@@ -126,7 +126,12 @@ function getUserRow(json) {
 cargaUsuarios();
 formularioAddPostal.addEventListener("submit",(e)=>{
   e.preventDefault();
-  let formData=new FormData(formularioAddPostal[0]);
+  let descripcion  = document.getElementById("textarea1").value
+
+  let file = document.getElementById("uploadedFile").files[0]
+  let formData=new FormData();
+  formData.append("file",file)
+  formData.append("brief",descripcion)
   let nombreCat=document.getElementById("selector").value
   formData.append("categoria",nombreCat)
   axios.post("/insertPostal",formData,{ 
