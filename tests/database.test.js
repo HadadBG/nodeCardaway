@@ -23,6 +23,10 @@ describe("DatabaseTest", () => {
     expect(insertPostalsResult.errors).toBeUndefined()
 
   })
+  test("Can get postales by textToSearch",async()=>{
+    const response=await PostalesDAO.getPostales({textToSearch:"enchiladas-mole"})
+    expect(response[0].extension).toEqual("png")
+  })
   test ("Can delete many postales",async()=>{
     const deletePostalsResult= await PostalesDAO.deletePostales(insertedIds)
     expect(deletePostalsResult.nDeleted).toEqual(4)
@@ -54,7 +58,7 @@ describe("DatabaseTest", () => {
   test("Can get users by text search",async()=>{
     let usuarios
 
-      usuarios =await UsuariosDAO.getUsuarios({textToSearch:"cadenadetesteo"})
+      usuarios =await UsuariosDAO.getUsuarios({textToSearch:"test@test"})
 
 
     expect(usuarios[0].nombre).toEqual("Hadad")
@@ -73,9 +77,9 @@ describe("DatabaseTest", () => {
     expect(insertResult.insertedId).toEqual("admin2") 
   })
   test("Authentificate an Admin",async()=>{
-    let result = await AdminDAO.isAdmin({username:"admino",password:"admin"})
+    let result = await AdminDAO.login({username:"admino",password:"admin"})
     expect(result.loginResult).toEqual(-1) 
-    result = await AdminDAO.isAdmin({username:"admin2",password:"admin"})
+    result = await AdminDAO.login({username:"admin2",password:"admin"})
     expect(result.loginResult).toEqual(1)
      
   })

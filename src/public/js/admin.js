@@ -1,15 +1,32 @@
 var seccion = "usuarios";
 var usersPerPage = 4;
+var postalesPerPage = 4;
 var page = 0;
+var pageP = 0;
 var textToSearch = "";
 let formularioAddPostal = document.getElementById("formPostal")
 let cargadorU = document.getElementById("cargadorU");
 let buscadorU = document.getElementById("buscadorU");
+let cargadorP = document.getElementById("cargadorP")
+let buscadorP = document.getElementById("buscadorP")
 
-  document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('select');
     var instances = M.FormSelect.init(elems, {});
   });
+document.getElementById("leftArrowP").addEventListener("click", () => {
+  if (pageP != 0) {
+    pageP -= 1;
+  }
+  cargaPostales();
+  document.getElementById("noPageP").innerText = pageP + 1;
+});
+document.getElementById("rightArrowP").addEventListener("click", () => {
+  pageP += 1;
+  cargaPostales();
+  document.getElementById("noPageP").innerText = pageP + 1;
+});
+
 document.getElementById("leftArrow").addEventListener("click", () => {
   if (page != 0) {
     page -= 1;
@@ -22,6 +39,7 @@ document.getElementById("rightArrow").addEventListener("click", () => {
   cargaUsuarios();
   document.getElementById("noPage").innerText = page + 1;
 });
+
 
 document.addEventListener("DOMContentLoaded", function() {
   var elems = document.querySelectorAll(".modal");
@@ -55,6 +73,56 @@ function cargaUsuarios() {
         page: page,
         textToSearch: buscadorU.value,
         usersPerPage: usersPerPage
+      }
+    })
+    .then(res => {
+      if (res.status == 200) {
+        cargadorU.innerHTML = "";
+        res.data.forEach(dato => {
+          cargadorU.innerHTML += getUserRow(dato);
+        });
+        Array.from(document.getElementsByClassName("deleteButton")).forEach(
+          button => {
+            let correo =
+              button.parentElement.parentElement.children[2].innerText;
+
+            button.addEventListener("click", () => {
+              axios
+                .delete("/deleteUsuario", {
+                  params: {
+                    correo: correo,
+                  }
+                })
+                .then(res => {
+                  if (res.status == 200) {
+                    if (res.data.success) {
+		      cargaUsuarios()
+                      Swal.fire(
+                        "Cardaway",
+                        "Usuario Eliminado con exito",
+                        "success"
+                      );
+		      
+                    } else {
+                      Swal.fire("Cardaway", "Ocurrio un error", "error");
+                    }
+                  } else {
+                    Swal.fire("Cardaway", "Error de Conexion", "error");
+                  }
+                });
+            });
+          }
+        );
+      } else console.log("Error al cargar los Usuarios");
+    });
+}
+function cargaPostales() {
+  axios
+    .get("/getPostales", {
+      params: {
+        page: pageP,
+        textToSearch: buscadorP.value,
+        postalesPerPage: postalesPerPage
       }
     })
     .then(res => {
@@ -137,6 +205,18 @@ formularioAddPostal.addEventListener("submit",(e)=>{
   axios.post("/insertPostal",formData,{ 
     headers: {
       'Content-Type': 'multipart/form-data'
+    }
+  }).then(res =>{
+    if(res.status == 200){
+     if(res.data.success){
+       Swal.fire("Cardaway",res.data.msg,"success")
+     }
+      else{
+	Swal.fire("Cardaway",res.data.msg,"error")
+      }
+    }
+    else{
+      Swal.fire("Cardaway","Error de Conexion","error")
     }
   })
 })

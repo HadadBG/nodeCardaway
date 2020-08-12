@@ -1,7 +1,7 @@
 let postales;
 let cardaway;
-import { ObjectId } from "bson"
-import {Date}       from "bson"
+import { ObjectId } from "bson";
+import { Date } from "bson";
 
 export default class PostalesDAO {
   static async injectDB(conn) {
@@ -17,7 +17,7 @@ export default class PostalesDAO {
       );
     }
   }
-  static async insertPostales(toInsertPostales = [{  }]) {
+  static async insertPostales(toInsertPostales = [{}]) {
     let response = { insertedIds: undefined, errors: undefined };
     try {
       let insertResult = await postales.insertMany(toInsertPostales, {
@@ -34,13 +34,13 @@ export default class PostalesDAO {
   static async deletePostales(toDeletePostalesIds = []) {
     let deleteOperations = toDeletePostalesIds.map(function(id) {
       let Operation = {};
-      Operation["deleteOne"] = {filter:{_id:ObjectId(id) }};
+      Operation["deleteOne"] = { filter: { _id: ObjectId(id) } };
       return Operation;
     });
-    let response={nDeleted:undefined,errors:undefined};
+    let response = { nDeleted: undefined, errors: undefined };
     try {
       let resultBulkWrite = await postales.bulkWrite(deleteOperations);
-	  response.nDeleted=resultBulkWrite.deletedCount
+      response.nDeleted = resultBulkWrite.deletedCount;
     } catch (e) {
       response.errors = e;
     }
@@ -48,17 +48,32 @@ export default class PostalesDAO {
   }
 
   static async getPostales({
-    page=0,
-    postalesPerPage=9,
-    filter={}
-  }){
-    let response
-  try{
-   response= await postales.find(filter,{limit:postalesPerPage,skip:page*postalesPerPage}).toArray() 
-  }catch(e){
-    response=e
+    page = 0,
+    postalesPerPage = 9,
+    filter = {},
+    textToSearch = null
+  }) {
+    let response;
+    try {
+      response = await postales
+        .find(
+          {
+            $and: [
+              filter,
+              {
+                $or: [
+                  { brief: { $regex: textToSearch, $options: "i" } },
+                  { categoria: { $regex: textToSearch, $options: "i" } }
+                ]
+              }
+            ]
+          },
+          { limit: postalesPerPage, skip: page * postalesPerPage }
+        )
+        .toArray();
+    } catch (e) {
+      response = e;
+    }
+    return response;
   }
-    return response
-  }
-
 }
