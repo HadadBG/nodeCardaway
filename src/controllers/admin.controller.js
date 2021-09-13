@@ -65,4 +65,12 @@ export default class adminController {
       });
     });
   }
+  static async deletePostales(req,res){
+    let result = await postalesDao.deletePostales([req.query.toDeletePostalId])
+    if(result.nDeleted==1)
+      return res.json({success:true,msg:"Postal eliminada correctamente"})
+    else
+      return res.json({success:false,msg:"Ocurrio un error al eliminar la postal"})
+    
+  }
 }

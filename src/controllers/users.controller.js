@@ -3,8 +3,19 @@ import adminDao from "../dao/adminDao.js";
 import passport from "passport";
 const nodemailer = require("nodemailer");
 var path = require("path");
+import formidable from "formidable";
+import mv from "mv";
 
 export default class userController {
+static  renderPerfil(req,res){
+  if(req.user){
+    console.log(req.user);
+    res.render('usuario/perfil');
+  }
+  else{
+    res.render('index')
+  }
+}
   static async agregarUsuario(req, res) {
     let result = validarCampos(req.body);
     if (result.errors.length == 0) {
@@ -19,13 +30,18 @@ export default class userController {
     }
     res.json({ errors: result.errors });
   }
+  static logOut(req, res) {
+    req.session.admin = false;
+    req.logout();
+    res.redirect("/");
+  }
   static async logIn(req, res) {
     if (!(req.body.username && req.body.password)) {
       return res.json({ success: false, msg: "Ocurrio un error" });
     }
     let response = await adminDao.login(req.body);
     if (response.loginResult == 1) {
-      req.session.admin=true
+      req.session.admin = true;
       return res.json({ success: true, msg: req.body.username });
     } else if (response.loginResult == 0) {
       return res.json({ success: false, msg: "Contraseña Incorrecta" });
@@ -52,6 +68,39 @@ export default class userController {
   static prueba(req, res) {
     enviaCorreo();
     res.json({ succes: "nice" });
+  }
+  static async actualizarUsuario(req, res) {
+    var form = new formidable.IncomingForm();
+    form.parse(req, async function(err, fields, files) {
+      let jsonPostal = {};
+      jsonPostal["brief"] = fields.brief;
+      jsonPostal["categoria"] = fields.categoria;
+      switch (files.file.type) {
+        case "image/jpeg":
+          jsonPostal["extension"] = "jpeg";
+          break;
+        case "image/gif":
+          jsonPostal["extension"] = "gif";
+          break;
+        case "image/png":
+          jsonPostal["extension"] = "png";
+          break;
+        default:
+	  return res.json({ success: false,msg:"Formato Invalido" });
+          break;
+      }
+      jsonPostal["fechaSub"] = new Date()
+      let result=await postalesDao.insertPostales([jsonPostal])
+      let id= result.insertedIds[0]
+
+
+      var oldpath = files.file.path;
+      var newpath = path.join(__dirname, "../public/postales/"+id+"."+jsonPostal.extension);
+      mv(oldpath, newpath, function(err) {
+	if (err) throw err;
+	res.json({success:true,msg:"Postal agregada correctamente"})
+      });
+    });
   }
 }
 
@@ -159,7 +208,9 @@ function validarCampos(json) {
     ret["json"]["segundoAp"] = json.segundoAp;
     ret["json"]["passwd"] = json.password;
     ret["json"]["_id"] = json.correo;
+    ret["json"]["genero"]=json.genero;
     ret["json"]["fechaNac"] = json.fechaNac;
   }
   return ret;
 }
+

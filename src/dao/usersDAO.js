@@ -17,7 +17,7 @@ export default class UsuariosDAO {
   }
   static async insertUsuario(toInsertUsuario) {
     if (toInsertUsuario.fechaNac)
-      toInsertUsuario.fechaNac = new Date(toInsertUsuario.fechaNac);
+      toInsertUsuario.fechaNac = new Date(toInsertUsuario.fechaNac+"T12:00:00");
     if (toInsertUsuario.passwd)
       toInsertUsuario.passwd = await bcrypt.hash(toInsertUsuario.passwd, 10);
     let response = { insertedId: undefined, errors: undefined };
@@ -69,4 +69,15 @@ export default class UsuariosDAO {
       .toArray();
     return response;
   }
+    static async updateUsuario(correo,updateUsuario){
+     return usuarios.updateOne({_id:correo},{
+       $set:{nombre:updateUsuario.nombre,
+            primerAp:updateUsuario.primerAp,
+            segundoAP:updateUsuario.segundoAP,
+            genero:updateUsuario.genero,
+            fechaNac:updateUsuario.fechaNac,
+            passwd:  await bcrypt.hash(updateUsuario.passwd, 10)
+    }}) 
+      
+    }
 }

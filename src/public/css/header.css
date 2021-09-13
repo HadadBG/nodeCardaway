@@ -12,7 +12,10 @@ html {
   overflow:hidden;
   background-color: #23374b;
 }
+header{
+    margin-bottom:2rem;
 
+}
 #nav-li:hover {
   text-decoration: underline;
 }

@@ -3,12 +3,16 @@
   {{#if noButtons}}
     <nav>
       <div class="nav-wrapper">
-	{{#if admin}}
-<a href="/" class="brand-logo hide-on-med-and-down">
+        {{#if admin}}
+          <a href="/" class="brand-logo hide-on-med-and-down">
             CARDAWAY-MyAdmin
           </a>
-<a href="/"><i class="material-icons left arrowBack"> arrow_back</i></a>
-	  <ul class="right">
+          <a href="/">
+            <i class="material-icons left arrowBack">
+              arrow_back
+            </i>
+          </a>
+          <ul class="right">
             <li id="nav-li">
               <ul class="tabs">
                 <li class="tab" href="#test1">
@@ -19,7 +23,7 @@
                   </a>
                 </li>
 
-                <li class="tab" href="#test2">
+                <li class="tab" href="#test2" id="sectionPostales">
                   <a href="#test2">
                     <i class="material-icons">
                       local_post_office
@@ -37,11 +41,15 @@
             </li>
 
             <li id="nav-li">
-              <a href="./php/functions/cerrar_session.php">
+              <a href="/logout">
                 Cerrar Sesión
               </a>
             </li>
           </ul>
+        {{else}}
+          <a href="/" class="brand-logo">
+            CARDAWAY
+          </a>
         {{/if}}
       </div>
     </nav>
@@ -72,19 +80,19 @@
                 </button>
               </a>
               <li id="nav-li">
-                <a href="./php/functions/cerrar_session.php">
+                <a href="/logout">
                   Cerrar Sesión
                 </a>
               </li>
             </li>
           {{else if user}}
             <li id="nav-li">
-              <a href="./php/pages/user_page.php">
+              <a href="/perfil">
                 Mi cuenta
               </a>
             </li>
             <li id="nav-li">
-              <a href="./php/functions/cerrar_session.php">
+              <a href="/logout">
                 Cerrar Sesión
               </a>
             </li>
@@ -118,18 +126,18 @@
             </a>
           </li>
           <li>
-            <a href="./php/functions/cerrar_session.php">
+            <a href="/logout">
               Cerrar Sesion
             </a>
           </li>
         {{else if user}}
           <li id="nav-li">
-            <a href="./php/pages/user_page.php">
+            <a href="/perfil">
               Mi cuenta
             </a>
           </li>
           <li id="nav-li">
-            <a href="./php/functions/cerrar_session.php">
+            <a href="/logout">
               Cerrar Sesión
             </a>
           </li>

@@ -9,8 +9,9 @@ static async getPostales  (req,res){
   let reqJson={}
   reqJson["postalesPerPage"]=parseInt(req.query.postalesPerPage)
   reqJson["page"]=parseInt(req.query.page)
-  reqJson["filter"]=JSON.parse(req.query.filter)
+  reqJson["filter"]=JSON.parse(req.query.filter || "{}")
   reqJson["textToSearch"]=req.query.textToSearch
+  reqJson["sort"]=JSON.parse(req.query.sort || "{}")
   let postales= await PostalesDAO.getPostales(reqJson)
   res.json(postales) 
 }

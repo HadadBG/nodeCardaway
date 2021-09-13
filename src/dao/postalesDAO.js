@@ -33,9 +33,9 @@ export default class PostalesDAO {
 
   static async deletePostales(toDeletePostalesIds = []) {
     let deleteOperations = toDeletePostalesIds.map(function(id) {
-      let Operation = {};
-      Operation["deleteOne"] = { filter: { _id: ObjectId(id) } };
-      return Operation;
+      let operation = {};
+      operation["deleteOne"] = { filter: { _id: ObjectId(id) } };
+      return operation;
     });
     let response = { nDeleted: undefined, errors: undefined };
     try {
@@ -51,7 +51,8 @@ export default class PostalesDAO {
     page = 0,
     postalesPerPage = 9,
     filter = {},
-    textToSearch = null
+    textToSearch = "",
+    sort = {}
   }) {
     let response;
     try {
@@ -68,7 +69,12 @@ export default class PostalesDAO {
               }
             ]
           },
-          { limit: postalesPerPage, skip: page * postalesPerPage }
+          {
+            limit: postalesPerPage,
+            skip: page * postalesPerPage,
+            sort: sort
+
+          }
         )
         .toArray();
     } catch (e) {

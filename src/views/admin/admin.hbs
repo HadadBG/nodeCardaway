@@ -28,24 +28,38 @@
         <div class="row">
           <div class="input-field col s12">
             <select id="selector">
-              <option value="Amor">Amor</option>
-              <option value="Fechas_fest">Fechas Festivas</option>
-              <option value="Paisajes">Paisajes</option>
-              <option value="Comida">Comida</option>
-              <option value="Vintage">Vintage</option>
-              <option value="Otros">Otros</option>
+              <option value="Amor">
+                Amor
+              </option>
+              <option value="Fechas Festivas">
+                Fechas Festivas
+              </option>
+              <option value="Paisajes">
+                Paisajes
+              </option>
+              <option value="Comida">
+                Comida
+              </option>
+              <option value="Vintage">
+                Vintage
+              </option>
+              <option value="Otros">
+                Otros
+              </option>
             </select>
             <label>
               Categoria
             </label>
           </div>
         </div>
-	<div class="row">
-	  <div class="input-field col s12">
-	    <textarea id="textarea1" class="materialize-textarea"></textarea>
-	    <label for="textarea1">Descripción</label>
-	  </div>
-	</div>
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea id="textarea1" class="materialize-textarea"></textarea>
+            <label for="textarea1">
+              Palabras Clave
+            </label>
+          </div>
+        </div>
         <div class="row">
           <div class="file-field input-field col s12">
             <div class="btn">
@@ -183,7 +197,7 @@
                   Categoria
                 </th>
                 <th class="headDescripcion">
-                  Descripción
+                  Fecha de Subida
                 </th>
                 <th>
                   Acción
@@ -191,82 +205,6 @@
               </tr>
             </thead>
             <tbody id="cargadorP">
-              <tr>
-                <th class="postalContainer">
-                  <img
-                    src="postales/Fechas Festivas/dia_muertos_01.gif"
-                    alt="algo"
-                  />
-                </th>
-                <th class="categoria">
-                  Fechas Festivas
-                </th>
-                <th class="descripcion">
-                  Día de Muertos
-                </th>
-                <th class="icono">
-                  <i class="material-icons">
-                    delete
-                  </i>
-                </th>
-                <tr>
-                  <th class="postalContainer">
-                    <img
-                      src="postales/Fechas Festivas/dia_muertos_01.gif"
-                      alt="algo"
-                    />
-                  </th>
-                  <th class="categoria">
-                    Fechas Festivas
-                  </th>
-                  <th class="descripcion">
-                    Día de Muertos
-                  </th>
-                  <th class="icono">
-                    <i class="material-icons">
-                      delete
-                    </i>
-                  </th>
-                </tr>
-              </tr>
-              <tr>
-                <th class="postalContainer">
-                  <img
-                    src="postales/Fechas Festivas/dia_muertos_01.gif"
-                    alt="algo"
-                  />
-                </th>
-                <th class="categoria">
-                  Fechas Festivas
-                </th>
-                <th class="descripcion">
-                  Día de Muertos
-                </th>
-                <th class="icono">
-                  <i class="material-icons">
-                    delete
-                  </i>
-                </th>
-              </tr>
-              <tr>
-                <th class="postalContainer">
-                  <img
-                    src="postales/Fechas Festivas/dia_muertos_01.gif"
-                    alt="algo"
-                  />
-                </th>
-                <th class="categoria">
-                  Fechas Festivas
-                </th>
-                <th class="descripcion">
-                  Día de Muertos
-                </th>
-                <th class="icono">
-                  <i class="material-icons">
-                    delete
-                  </i>
-                </th>
-              </tr>
             </tbody>
           </table>
         </div>
@@ -292,40 +230,120 @@
   </div>
 
   <div id="test3" class="col s12">
-    <form class="center-align">
-      <a
-        button
-        class="btn-large #1565c0 blue darken-3"
-        href="../functions/grafica_categorias_mas_gustadas.php"
-        target="_blank"
-      >
-        Categorias mas gustadas
-      </a>
-      <a
-        button
-        class="btn-large #1565c0 blue darken-3"
-        href="../functions/grafica_envios_semanales.php"
-        target="_blank"
-      >
-        Envios semanales
-      </a>
-      <a
-        button
-        class="btn-large #1565c0 blue darken-3"
-        href="../functions/grafica_generos.php"
-        target="_blank"
-      >
-        Genero
-      </a>
-      <a
-        button
-        class="btn-large #1565c0 blue darken-3"
-        href="../functions/grafica_postales_mas_gustadas.php"
-        target="_blank"
-      >
-        Postales mas gustadas
-      </a>
-    </form>
+    <div class="estadisticasContainer">
+      <div class="postalesMasEnviadas">
+        <div class="tituloGraf">
+          <p>
+            Postales más Enviadas
+          </p>
+        </div>
+        <div class="resultadosMasEnviadas">
+          <canvas id="postalesMasEnviadasGraf"></canvas>
+        </div>
+        <div class="labelMasEnviadas">
+          <div class="labelContainer">
+            <img
+              src="./../postales/5f3314f839bdbe093251ef73.jpeg"
+              alt="saludos"
+            />
+          </div>
+          <div class="labelContainer">
+            <img
+              src="./../postales/5f3314f839bdbe093251ef73.jpeg"
+              alt="saludos"
+            />
+          </div>
+          <div class="labelContainer">
+            <img
+              src="./../postales/5f3314f839bdbe093251ef73.jpeg"
+              alt="saludos"
+            />
+          </div>
+          <div class="labelContainer">
+            <img
+              src="./../postales/5f3314f839bdbe093251ef73.jpeg"
+              alt="saludos"
+            />
+          </div>
+          <div class="labelContainer">
+            <img
+              src="./../postales/5f3314f839bdbe093251ef73.jpeg"
+              alt="saludos"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="enviosSemanales">
+        <div class="tituloGraf">
+          <p>
+            Envios de esta Semana
+          </p>
+        </div>
+        <div class="resultadosGraf">
+          <canvas id="enviosSemanalesGraf"></canvas>
+        </div>
+      </div>
+      <div class="generoUsuarios">
+        <div class="tituloGraf">
+          <p>
+            Usuarios por género
+          </p>
+        </div>
+        <div class="resultadosGraf">
+          <canvas id="generoGraf"></canvas>
+        </div>
+      </div>
+      <div class="categoriasMasEnviadas">
+        <div class="tituloGraf">
+          <p>
+            Categorias más enviadas
+          </p>
+        </div>
+        <div class="resultadosGraf">
+          <canvas id="categoriasGraf"></canvas>
+        </div>
+      </div>
+      <div class="reporte">
+	<button class="waves-effect waves-light btn-large btn" >
+	  Generar Reporte
+        </button>
+      </div>
+    </div>
+
+    {{! <form class="center-align"> }}
+    {{! <a }}
+    {{! button }}
+    {{! class="btn-large #1565c0 blue darken-3" }}
+    {{! href="../functions/grafica_categorias_mas_gustadas.php" }}
+    {{! target="_blank" }}
+    {{! > }}
+    {{! Categorias mas gustadas }}
+    {{! </a> }}
+    {{! <a }}
+    {{! button }}
+    {{! class="btn-large #1565c0 blue darken-3" }}
+    {{! href="../functions/grafica_envios_semanales.php" }}
+    {{! target="_blank" }}
+    {{! > }}
+    {{! Envios semanales }}
+    {{! </a> }}
+    {{! <a }}
+    {{! button }}
+    {{! class="btn-large #1565c0 blue darken-3" }}
+    {{! href="../functions/grafica_generos.php" }}
+    {{! target="_blank" }}
+    {{! > }}
+    {{! Genero }}
+    {{! </a> }}
+    {{! <a }}
+    {{! button }}
+    {{! class="btn-large #1565c0 blue darken-3" }}
+    {{! href="../functions/grafica_postales_mas_gustadas.php" }}
+    {{! target="_blank" }}
+    {{! > }}
+    {{! Postales mas gustadas }}
+    {{! </a> }}
+    {{! </form> }}
   </div>
 </body>
 <script src="js/Parsers.js"></script>
@@ -333,6 +351,7 @@
   src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.3/axios.min.js"
 ></script>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="js/admin.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script

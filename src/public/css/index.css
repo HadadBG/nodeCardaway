@@ -73,11 +73,13 @@ html{
 
   cursor:pointer;
 }
-
+.container{
+  margin:auto;
+}
 /*############################################################GAL###############################################################*/
 
 #gal-container {
-  width: 90%;
+  width: 100%;
   color: #707070;
 }
 
@@ -359,4 +361,9 @@ html{
   to {
     background-color: #23374b;
   }
+}
+.textoFin{
+  font-size:4rem;
+  color:#039BE5;
+  text-align:center;
 }

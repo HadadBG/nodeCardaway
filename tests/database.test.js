@@ -41,18 +41,34 @@ describe("DatabaseTest", () => {
       fechaNac: "1999-08-20",
       passwd:"hola123"
     }
+
     const insertResult = await UsuariosDAO.insertUsuario(testUsuario)
     usuarioId = insertResult.insertedId
     expect(insertResult.errors).toBeUndefined() 
   })
+  
+test("Can Update a User",async()=>{
+    const testUsuario = {
+      _id:"test@test.test",
+      nombre:"Jose",
+      primerAp:"cadenadetesteo",
+      segundoAP:"García",
+      genero:"Mujer",
+      fechaNac: "1999-08-20",
+      passwd:"hola123"
+    }
+    const insertResult = await UsuariosDAO.updateUsuario(testUsuario._id,testUsuario)
+    expect(insertResult.result.nModified).toEqual(1) 
+  })
+
   test("A user can login",async()=>{
     let {loginResult,usuario}=await UsuariosDAO.login({username:"test@test.test",password:"hola123"})
     expect(loginResult).toEqual(1)
-    expect(usuario.nombre).toEqual("Hadad")
+    expect(usuario.nombre).toEqual("Jose")
   })
   test("Can get a user by Email",async ()=>{
     let usuario = await UsuariosDAO.getUsuario({email:"test@test.test"})
-    expect(usuario.nombre).toEqual("Hadad")
+    expect(usuario.genero).toEqual("Mujer")
   })
 
   test("Can get users by text search",async()=>{
@@ -61,7 +77,7 @@ describe("DatabaseTest", () => {
       usuarios =await UsuariosDAO.getUsuarios({textToSearch:"test@test"})
 
 
-    expect(usuarios[0].nombre).toEqual("Hadad")
+    expect(usuarios[0].nombre).toEqual("Jose")
   })
   test("Can Delete a User",async ()=>{
     const deleteResult = await UsuariosDAO.deleteUsuario(usuarioId)

@@ -3,7 +3,10 @@ var loginForm = document.getElementById("datos");
 var content = document.getElementById("postalContainer");
 var page = 0;
 var postalCharger = document.getElementById("postalCharger");
+var destacadosCharger = document.getElementById("destacadosCharger");
 var filter = {};
+var cargandoPostales = false;
+var reachFin=false;
 var categorias = [
   "All",
   "Amor",
@@ -23,10 +26,6 @@ const myswal = Swal.mixin({
 //
 //Materialize Inicialization
 //
-document.addEventListener("DOMContentLoaded", function() {
-  var elems = document.querySelectorAll(".carousel");
-  var instances = M.Carousel.init(elems, {});
-});
 
 document.addEventListener("DOMContentLoaded", function() {
   var elems = document.querySelectorAll(".modal");
@@ -76,33 +75,69 @@ document.addEventListener(
 document.getElementById("close").addEventListener("click", () => {
   modal.style.display = "none";
 });
+function cargaDestacados() {
+  axios
+    .get("/getPostales", {
+      params: {
+        postalesPerPage: 10,
+        sort: { noEnvios: 1 }
+      }
+    })
+    .then(res => {
+      res.data.forEach(dato => {
+        destacadosCharger.innerHTML += getDestacadosRow(dato);
+      });
+      var elems = document.querySelectorAll(".carousel");
+      var instances = M.Carousel.init(elems, {});
+    })
+    .catch(err => {
+      console.log(err);
+      setTimeout(cargaPostales, 2000);
+    });
+}
 cargaPostales();
+cargaDestacados();
 function cargaPostales() {
+    if(cargandoPostales===true) {//we want it to match
+        setTimeout(cargaPostales, 50);//wait 50 millisecnds then recheck
+        return;
+    }
+  cargandoPostales = true
   axios
     .get("/getPostales", {
       params: {
         page: page,
         filter: filter,
-	postalesPerPage:9
+        postalesPerPage: 9,
+        sort: { fechaSub: -1 }
       }
     })
     .then(function(res) {
       if (res.status == 200) {
+	if (res.data.length===0){
+	  if(!reachFin){
+	    reachFin=true
+	    wrapper.classList.remove("wrapper")
+	    wrapper.innerHTML=`
+  <div class="textoFin">
+    <span>Parece que ya no hay mas postales</span>
+  </div>
+`;
+	  }
+	}
+	else{
         let postalBlock = document.createElement("div");
-
         postalBlock.setAttribute("class", "postalContainer");
         res.data.forEach((postal, idx) => {
-          postalBlock.innerHTML +=
-            '<div class="postal post' +
-            (idx + 1) +
-            '"><img src="/postales/Amor/gato_01.png"' +
-            ' alt="' +
-            idx +
-            '"> </div>';
-          console.log(postal);
+          postalBlock.innerHTML += ` 
+      <div class="postal post${idx + 1}">
+        <img src="/postales/${postal._id}.${postal.extension}" alt="${idx}"/>
+      </div> 
+ `;
         });
         page += 1;
         postalCharger.appendChild(postalBlock);
+	}
       }
     })
     .catch(function(err) {
@@ -110,12 +145,14 @@ function cargaPostales() {
       setTimeout(cargaPostales, 2000);
     })
     .then(function() {
-      //Codigo a ejecutarse sin importar nada
+      cargandoPostales = false
     });
 }
 window.addEventListener("scroll", () => {
+  
   let { scrollTop, scrollHeight, clientHeight } = document.documentElement;
   if (clientHeight + scrollTop == scrollHeight) {
+    console.log("Scrolling:"+clientHeight +","+scrollTop+","+scrollHeight)
     cargaPostales();
   }
 });
@@ -127,18 +164,38 @@ categorias.forEach((categoria, idx) => {
   } else {
     htmlCategory = document.getElementById("cat" + categoria);
   }
-  htmlCategory.addEventListener("click", () => {
-    page = 0;
-    if(categoria == "All"){
-      filter={}
+  htmlCategory.addEventListener("click", () => {   
+    if(reachFin){
+      reachFin=false
+      wrapper.classList.add("wrapper")
+      wrapper.innerHTML=`
+        <div class="charging chargingPost1"></div>
+        <div class="charging chargingPost2"></div>
+        <div class="charging chargingPost3"></div>
+        <div class="charging chargingPost4"></div>
+        <div class="charging chargingPost5"></div>
+`;
     }
-    else{
-    filter = { categoria: categoria };
+
+    page = 0;
+    if (categoria == "All") {
+      filter = {};
+    } else {
+      filter = { categoria: categoria };
     }
     postalCharger.innerHTML = "";
     cargaPostales();
   });
 });
+function getDestacadosRow(json) {
+  innerHTML = `
+      <a class="carousel-item">
+        <img src="/postales/${json._id}.${json.extension}" />
+      </a>
+ `;
+  return innerHTML;
+}
+
 /*)*/
 //e.preventDefault();
 //$.ajax({
@@ -252,9 +309,6 @@ document.addEventListener(
 span.addEventListener("click", () => {
   modal.style.display = "none";
 });
-document.getElementById("enviar").addEventListener("click",()=>{
-
-  //axios.get("/envios",{postal:})
-   
-})
-
+/*document.getElementById("enviar").addEventListener("click", () => {*/
+  ////axios.get("/envios",{postal:})
+/*});*/
