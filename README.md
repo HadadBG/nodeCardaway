@@ -1,5 +1,5 @@
 # nodeCardaway
-Proyecto original : https://github.com/RicFraga/Cardaway
-credenciales admin:
-Email:admin
-Contraseña:admin
+Proyecto original : https://github.com/RicFraga/Cardaway<br />
+credenciales admin:<br />
+Email:admin<br />
+Contraseña:admin<br />
